@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/cevapButonRenk</item>
+        <item name="colorPrimaryDark">@color/soruBackground</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/backgroundColor</item>
+        <item name="android:buttonStyle">@style/answerButton</item>
+        <item name="buttonStyle">@style/answerButton</item>
+    </style>
+
+    <style name="questionTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/soruBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:text">""</item>
+        <item name="android:textSize">@dimen/question_text_size</item>
+        <item name="android:textColor">@color/backgroundColor</item>
+    </style>
+
+    <style name="questionCardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">300dp</item>
+        <item name="android:background">@color/soruBackground</item>
+    </style>
+
+    <style name="answerCardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_marginTop">0dp</item>
+    </style>
+
+    <style name="answerButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/cevapButonRenk</item>
+        <item name="android:textColor">@color/backgroundColor</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:text">"Test Text"</item>
+    </style>
+
+</resources>

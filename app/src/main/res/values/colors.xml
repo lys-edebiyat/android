@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cevapButonRenk">#283C63</color>
+    <color name="cevapButonTextColor">#f9e7d1</color>
+    <color name="soruBackground">#f85f73</color>
+    <color name="colorAccent">#283c63</color>
+    <color name="backgroundColor">#f9e7d1</color>
+</resources>
