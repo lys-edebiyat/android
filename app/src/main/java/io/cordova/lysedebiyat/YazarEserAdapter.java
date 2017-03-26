@@ -20,6 +20,11 @@ public class YazarEserAdapter extends BaseAdapter implements StickyListHeadersAd
     }
 
     @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
+
+    @Override
     public int getCount() {
         return countries.length;
     }

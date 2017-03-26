@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><!-- This is the fragment  to be displayed for a section associated with a tab -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/era_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/important_authors"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/important_authors"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:text="@string/short_text" />
+
+        <Button
+            android:id="@+id/details_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:autoLink="web"
+            android:clickable="true"
+            android:linksClickable="true"
+            android:text="@string/detailed_info"
+            android:background="@color/accent"/>
+    </LinearLayout>
+</ScrollView>

@@ -2,5 +2,10 @@
     <string name="app_name">lysedebiyat</string>
     <string name="sweet_alert_next_question">Sıradaki Soru</string>
     <string name="game">Oyun</string>
+    <string name="bullet_point">• </string>
     <string name="author_book_list_title">Yazar - Eser Listesi</string>
+
+    <string name="important_authors"><u>Önemli Yazarlar</u></string>
+    <string name="detailed_info">Daha detaylı bilgi için tıklayın</string>
+
 </resources>

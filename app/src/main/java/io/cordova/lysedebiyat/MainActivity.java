@@ -76,6 +76,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(view.getId() == 2) {
                             navigateToList();
+                        } else if(view.getId() == 3) {
+                            menu.closeDrawer();
                         }
                         return true;
                     }
