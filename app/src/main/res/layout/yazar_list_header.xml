@@ -3,7 +3,7 @@
     android:id="@+id/yazar_header"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
+    android:padding="6dp"
     android:textSize="16sp"
     android:textStyle="bold"
     android:background="@color/divider"/>

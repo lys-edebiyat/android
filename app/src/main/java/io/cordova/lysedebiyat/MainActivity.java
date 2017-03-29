@@ -1,16 +1,20 @@
 package io.cordova.lysedebiyat;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,44 +22,86 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.github.javiersantos.materialstyleddialogs.enums.Style;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
+
+    String appId = "io.cordova.lysedebiyat";
+    String appWebUrl = "https://lys-edebiyat.github.io/";
+
     String data[][];
     String answer;
     String question;
     String era;
 
+    private enum MenuItems {
+        BACK_TO_HOME,
+        ERA_LIST,
+        OPEN_IN_WEB,
+        SHARE,
+        RATE_ON_STORE,
+        ABOUT_US,
+        CONTACT
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         prepareDrawer(this);
         prepareQuestionData();
         createQuestion();
         prepareButtonBindings();
-
     }
 
     protected void prepareDrawer(Activity activity) {
 
         // Set the drawer items.
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.game);
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.author_book_list_title);
+        final PrimaryDrawerItem backToHome = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.BACK_TO_HOME.ordinal())
+                .withName(R.string.back_to_game)
+                .withIcon(GoogleMaterial.Icon.gmd_home);
+
+        PrimaryDrawerItem eraList = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.ERA_LIST.ordinal())
+                .withName(R.string.era_list_title)
+                .withIcon(GoogleMaterial.Icon.gmd_list);
+
+        PrimaryDrawerItem rateOnStore = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.RATE_ON_STORE.ordinal())
+                .withName(R.string.rate_on_store)
+                .withIcon(GoogleMaterial.Icon.gmd_rate_review);
+
+        PrimaryDrawerItem openInWeb = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.OPEN_IN_WEB.ordinal())
+                .withName(R.string.open_in_web)
+                .withIcon(GoogleMaterial.Icon.gmd_open_in_browser);
+
+        PrimaryDrawerItem share = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.SHARE.ordinal())
+                .withName(R.string.share)
+                .withIcon(GoogleMaterial.Icon.gmd_share);
+
+        PrimaryDrawerItem aboutUs = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.ABOUT_US.ordinal())
+                .withName(R.string.about_us)
+                .withIcon(GoogleMaterial.Icon.gmd_info_outline);
+
+        PrimaryDrawerItem contact = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.CONTACT.ordinal())
+                .withName(R.string.contact_us)
+                .withIcon(GoogleMaterial.Icon.gmd_mail_outline);
 
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
@@ -67,17 +113,43 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         menu = new DrawerBuilder()
                 .withActivity(this)
                 .withAccountHeader(headerResult)
+                .withActionBarDrawerToggle(true)
+                .withSelectedItem(-1)
                 .addDrawerItems(
-                        item1,
-                        item2
+                        backToHome,
+                        eraList,
+                        rateOnStore,
+                        share,
+                        openInWeb,
+                        aboutUs,
+                        contact
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if(view.getId() == 2) {
-                            navigateToList();
-                        } else if(view.getId() == 3) {
-                            menu.closeDrawer();
+                        MenuItems[] m = MenuItems.values();
+                        switch (m[view.getId()]) {
+                            case BACK_TO_HOME:
+                                menu.closeDrawer();
+                                break;
+                            case ERA_LIST:
+                                navigateToList();
+                                break;
+                            case RATE_ON_STORE:
+                                navigateToStore();
+                                break;
+                            case OPEN_IN_WEB:
+                                navigateToWeb(appWebUrl);
+                                break;
+                            case SHARE:
+                                shareIt();
+                                break;
+                            case ABOUT_US:
+                                navigateToAboutUs();
+                                break;
+                            case CONTACT:
+                                sendMail();
+                                break;
                         }
                         return true;
                     }
@@ -85,9 +157,67 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .build();
     }
 
+    private void sendMail() {
+
+        String deviceInfo = "Sistem bilgilerimi de buraya bırakıyorum:\n";
+        deviceInfo += "OS: " + System.getProperty("os.version") + "\n";
+        deviceInfo += "SDK Version: " + Build.VERSION.SDK_INT + "\n";
+        deviceInfo += "Device: " + Build.DEVICE + "\n";
+        deviceInfo += "Model: " + Build.MODEL + "\n";
+        deviceInfo += "Product: " + Build.PRODUCT + "\n";
+
+        String mailContent = "Merhaba. Oyuna dair şöyle bir bildirim sağlamak istiyorum:\n\n\n\n";
+        mailContent += deviceInfo;
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"burak.karakan@gmail.com", "frknhatipoglu@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "LYS Edebiyat İletişim");
+        i.putExtra(Intent.EXTRA_TEXT, mailContent);
+        try {
+            startActivity(Intent.createChooser(i, "Mail Gönder"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "Yüklenmiş bir e-mail programı bulunamadı.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void navigateToStore() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + appId));
+        if (!storaNavigatorSucceeded(intent)) {
+            //Market (Google play) app seems not installed, let's try to open a webbrowser.
+            intent.setData(Uri.parse("https://play.google.com/store/apps/details?" + appId));
+            if (!storaNavigatorSucceeded(intent)) {
+                Toast.makeText(this, R.string.play_store_not_opened, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private boolean storaNavigatorSucceeded(Intent aIntent) {
+        try {
+            startActivity(aIntent);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            return false;
+        }
+    }
+
     private void navigateToList() {
         Intent intent = new Intent(this, DonemListe.class);
         startActivity(intent);
+    }
+
+    private void navigateToAboutUs() {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
+
+    private void shareIt() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "LYS Edebiyat Yazar - Eser");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "LYS Edebiyat Yazar - Eser Bilgi Yarışması'nı hemen indir!");
+        startActivity(Intent.createChooser(sharingIntent, "Şununla paylaş"));
     }
 
     @Override
@@ -111,6 +241,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mClickButton2.setOnClickListener(this);
         Button mClickButton3 = (Button) findViewById(R.id.cevap3);
         mClickButton3.setOnClickListener(this);
+        ImageView img = (ImageView) findViewById(R.id.menuIcon);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menu.openDrawer();
+            }
+        });
     }
 
     /**
@@ -194,8 +331,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @return
      */
     private String getDialogMessage() {
-        return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır. <b>" +
-                this.answer + "</b> bir <b>" + this.era + "</b> edebiyatı yazarıdır.";
+        if(!this.era.equals("Bağımsız")) {
+            return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
+                    this.answer + "</b> bir <b>" + this.era + "</b> edebiyatı yazarıdır.";
+        } else {
+            return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
+                    this.answer + "</b> bağımsız bir yazardır.";
+        }
     }
 
     /**

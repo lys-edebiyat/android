@@ -28,7 +28,8 @@
                 android:value="io.cordova.lysedebiyat.MainActivity" />
         </activity>
         <activity android:name=".BaseActivity" />
-        <activity android:name=".YazarEserListe"></activity>
+        <activity android:name=".YazarEserListe" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

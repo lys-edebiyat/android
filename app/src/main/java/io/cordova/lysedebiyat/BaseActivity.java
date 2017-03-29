@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -59,11 +60,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         finish();
     }
 
-    protected void constructToolbar(String title){
-        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
-        tb.setTitle(title);
-        setSupportActionBar(tb);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    protected void navigateToWeb(String url) {
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
     }
+
 
 }
