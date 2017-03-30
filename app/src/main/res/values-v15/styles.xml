@@ -11,23 +11,6 @@
         <item name="buttonStyle">@style/answerButton</item>
     </style>
 
-    <style name="questionTextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/soruBackground</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:text">""</item>
-        <item name="android:textSize">@dimen/question_text_size</item>
-        <item name="android:textColor">@color/backgroundColor</item>
-    </style>
-
-    <style name="questionCardView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">300dp</item>
-        <item name="android:background">@color/soruBackground</item>
-    </style>
-
     <style name="answerCardView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/button_height</item>

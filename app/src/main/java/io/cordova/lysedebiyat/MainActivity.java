@@ -36,13 +36,23 @@ import java.util.Random;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    String appId = "io.cordova.lysedebiyat";
-    String appWebUrl = "https://lys-edebiyat.github.io/";
+    static final String appId = "io.cordova.lysedebiyat";
+    static final String appWebUrl = "https://lys-edebiyat.github.io/";
+
+    // UI Elements
+    TextView soru;
+    Button[] buttonObjects;
+    Button button1;
+    Button button2;
+    Button button3;
 
     String data[][];
+    int dataLength;
     String answer;
     String question;
     String era;
+
+    MaterialStyledDialog.Builder dialog;
 
     private enum MenuItems {
         BACK_TO_HOME,
@@ -58,11 +68,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        soru = (TextView) findViewById(R.id.soru);
 
-        prepareDrawer(this);
+        dialog = new MaterialStyledDialog.Builder(this)
+                .setStyle(Style.HEADER_WITH_TITLE)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        createQuestion();
+                    }
+                });
+
         prepareQuestionData();
-        createQuestion();
         prepareButtonBindings();
+        createQuestion();
+        prepareDrawer(this);
     }
 
     protected void prepareDrawer(Activity activity) {
@@ -235,12 +255,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * Set on click listeners for the answer buttons.
      */
     private void prepareButtonBindings() {
-        Button mClickButton1 = (Button) findViewById(R.id.cevap1);
-        mClickButton1.setOnClickListener(this);
-        Button mClickButton2 = (Button) findViewById(R.id.cevap2);
-        mClickButton2.setOnClickListener(this);
-        Button mClickButton3 = (Button) findViewById(R.id.cevap3);
-        mClickButton3.setOnClickListener(this);
+        buttonObjects = new Button[3];
+        buttonObjects[0] = (Button) findViewById(R.id.cevap1);
+        buttonObjects[0].setOnClickListener(this);
+
+        buttonObjects[1] = (Button) findViewById(R.id.cevap2);
+        buttonObjects[1].setOnClickListener(this);
+
+        buttonObjects[2] = (Button) findViewById(R.id.cevap3);
+        buttonObjects[2].setOnClickListener(this);
+
         ImageView img = (ImageView) findViewById(R.id.menuIcon);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,6 +296,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             i++;
             cursor.moveToNext();
         }
+        dataLength = data.length;
     }
 
     /**
@@ -280,7 +305,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void createQuestion() {
         String buttonText;
         Random r = new Random();
-        int dataLength = this.data.length;
         int randomIndex = r.nextInt(dataLength);
         int answerIndex = r.nextInt(3);
 
@@ -289,25 +313,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         this.era = this.data[randomIndex][2];
 
         // Set the question.
-        TextView soru = (TextView) findViewById(R.id.soru);
         soru.setText(question);
 
         Map<String, Integer> seenChoices = new HashMap<String, Integer>();
-        seenChoices.put(question, 0);
+        seenChoices.put(question, 1);
 
         for (int count = 0; count < 3; count++) {
             randomIndex = r.nextInt(dataLength);
-            Button button = (Button) findViewById(buttons[count]);
+            Button button = buttonObjects[count];
             buttonText = this.data[randomIndex][0];
             while (seenChoices.get(buttonText) != null) {
                 randomIndex = r.nextInt(dataLength);
                 buttonText = this.data[randomIndex][0];
             }
-            seenChoices.put(buttonText, 0);
+            seenChoices.put(buttonText, 1);
             button.setText(buttonText);
         }
 
-        Button button = (Button) findViewById(buttons[answerIndex]);
+        Button button = buttonObjects[answerIndex];
         button.setText(this.answer);
     }
 
@@ -331,9 +354,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @return
      */
     private String getDialogMessage() {
-        if(!this.era.equals("Bağımsız")) {
+        if (!this.era.equals("Bağımsız")) {
             return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
                     this.answer + "</b> bir <b>" + this.era + "</b> edebiyatı yazarıdır.";
+        } else if (!this.era.equals("Divan Edebiyatı") &&
+                !this.era.equals("Fecr-i Ati Edebiyatı") &&
+                !this.era.equals("Halk Edebiyatı")) {
+            return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
+                    this.answer + "</b> bir <b>" + this.era + "</b> yazarıdır.";
         } else {
             return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
                     this.answer + "</b> bağımsız bir yazardır.";
@@ -350,18 +378,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void showMessage(int headerColor, String title, String msg) {
         TextView tv = new TextView(this);
         tv.setText(fromHtml(msg));
-        new MaterialStyledDialog.Builder(this)
-                .setStyle(Style.HEADER_WITH_TITLE)
-                .setHeaderColor(headerColor)
+
+        dialog.setHeaderColor(headerColor)
                 .setTitle(title)
                 .setCustomView(tv, 20, 20, 20, 20)
                 .setPositiveText(R.string.sweet_alert_next_question)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        createQuestion();
-                    }
-                })
                 .show();
     }
 

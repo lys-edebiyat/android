@@ -41,25 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         myDbHelper = ma.getMyDbHelper();
     }
 
-
-    protected void navigateToActivity(Class to, String stringToPass) {
-        Intent intent = new Intent(this, to);
-
-        // Put the data to the bundle.
-        Bundle b = new Bundle();
-        b.putString("data", stringToPass);
-        intent.putExtras(b);
-
-        // Start the activity and finish current one.
-        startActivity(intent);
-    }
-
-    protected void navigateToActivity(Context from, Class to) {
-        Intent intent = new Intent(from, to);
-        startActivity(intent);
-        finish();
-    }
-
     protected void navigateToWeb(String url) {
         Uri uriUrl = Uri.parse(url);
         Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);

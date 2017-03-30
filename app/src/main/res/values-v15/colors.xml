@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#C5CAE9</color>
-    <color name="accent">#FFC107</color>
+    <color name="primary">#2c2e35</color>
+    <color name="primary_dark">#2c2e35</color>
+    <color name="primary_light">#e2e2e2</color>
+    <color name="accent">#de4847</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+
 
     <color name="cevapButonRenk">@color/accent</color>
     <color name="cevapButonTextColor">@color/primary_text</color>
@@ -16,7 +16,7 @@
     <color name="colorAccent">@color/accent</color>
     <color name="backgroundColor">@color/icons</color>
     <color name="dialogHeaderWrong">#f85f73</color>
-    <color name="dialogHeaderCorrect">#cddc39</color>
+    <color name="dialogHeaderCorrect">#4caf50</color>
 
     <!-- MaterialDrawer DEFAULT colors -->
     <color name="material_drawer_background">#F9F9F9</color>
