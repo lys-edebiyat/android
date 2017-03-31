@@ -1,13 +1,15 @@
 package io.cordova.lysedebiyat;
 
 import android.database.Cursor;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
 
-public class YazarEserListe extends BaseActivity {
+import io.cordova.lysedebiyat.SliderHelper.SlidingBaseActivity;
+
+public class AuthorBookList extends SlidingBaseActivity {
 
     private String[][] data;
     private EraInfo eraInfo;
@@ -85,5 +87,6 @@ public class YazarEserListe extends BaseActivity {
         String authors = cursor.getString(1);
         String link = cursor.getString(2);
         eraInfo = new EraInfo(info, authors, link);
+        cursor.close();
     }
 }

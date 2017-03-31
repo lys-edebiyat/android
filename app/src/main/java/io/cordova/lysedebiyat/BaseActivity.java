@@ -1,25 +1,14 @@
 package io.cordova.lysedebiyat;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-
-import java.io.IOException;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -29,9 +18,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             R.id.cevap3
     };
 
-    Drawer menu;
+    protected Drawer menu;
 
-    DataBaseHelper myDbHelper;
+    protected DataBaseHelper myDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(launchBrowser);
     }
 
-
+    protected void setToolbarTitle(Activity v, String title) {
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
+    }
 }

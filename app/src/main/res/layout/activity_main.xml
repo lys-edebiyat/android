@@ -39,26 +39,26 @@
     <Button
         android:id="@+id/cevap1"
         style="@style/answerCardView"
-        android:layout_marginTop="50dp"
         android:layout_below="@+id/soruWrapper"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp" />
 
     <Button
         android:id="@+id/cevap2"
         style="@style/answerCardView"
-        android:layout_marginTop="6dp"
         android:layout_below="@+id/cevap1"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp" />
 
     <Button
         android:id="@+id/cevap3"
         style="@style/answerCardView"
-        android:layout_marginTop="6dp"
         android:layout_below="@+id/cevap2"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp" />
 
 
 </RelativeLayout>

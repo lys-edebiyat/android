@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-public class YazarEserAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+public class AuthorBookAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
-    private String[][] countries;
+    private String[][] data;
     private LayoutInflater inflater;
 
-    public YazarEserAdapter(Context context, String data[][]) {
+    public AuthorBookAdapter(Context context, String data[][]) {
         inflater = LayoutInflater.from(context);
-        countries = data;
+        this.data = data;
     }
 
     @Override
@@ -26,12 +26,12 @@ public class YazarEserAdapter extends BaseAdapter implements StickyListHeadersAd
 
     @Override
     public int getCount() {
-        return countries.length;
+        return data.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return countries[position];
+        return data[position];
     }
 
     @Override
@@ -52,7 +52,7 @@ public class YazarEserAdapter extends BaseAdapter implements StickyListHeadersAd
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.text.setText(countries[position][1]);
+        holder.text.setText(data[position][1]);
 
         return convertView;
     }
@@ -69,8 +69,8 @@ public class YazarEserAdapter extends BaseAdapter implements StickyListHeadersAd
             holder = (HeaderViewHolder) convertView.getTag();
         }
 
-        String headerText = countries[position][0];
-        holder.text.setText(headerText);
+        holder.text.setText(data[position][0]);
+
         return convertView;
     }
 
@@ -78,7 +78,7 @@ public class YazarEserAdapter extends BaseAdapter implements StickyListHeadersAd
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return countries[position][0].subSequence(0, 1).charAt(0);
+        return data[position][0].subSequence(0, 1).charAt(0);
     }
 
     private class HeaderViewHolder {

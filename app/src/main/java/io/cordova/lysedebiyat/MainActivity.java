@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
@@ -42,9 +40,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     // UI Elements
     TextView soru;
     Button[] buttonObjects;
-    Button button1;
-    Button button2;
-    Button button3;
 
     String data[][];
     int dataLength;
@@ -57,6 +52,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private enum MenuItems {
         BACK_TO_HOME,
         ERA_LIST,
+        AUTHOR_LIST,
         OPEN_IN_WEB,
         SHARE,
         RATE_ON_STORE,
@@ -98,6 +94,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .withName(R.string.era_list_title)
                 .withIcon(GoogleMaterial.Icon.gmd_list);
 
+        PrimaryDrawerItem authorList = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.AUTHOR_LIST.ordinal())
+                .withName(R.string.author_list_title)
+                .withIcon(GoogleMaterial.Icon.gmd_book);
+
         PrimaryDrawerItem rateOnStore = new PrimaryDrawerItem()
                 .withIdentifier(MenuItems.RATE_ON_STORE.ordinal())
                 .withName(R.string.rate_on_store)
@@ -138,6 +139,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .addDrawerItems(
                         backToHome,
                         eraList,
+                        authorList,
                         rateOnStore,
                         share,
                         openInWeb,
@@ -153,7 +155,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                 menu.closeDrawer();
                                 break;
                             case ERA_LIST:
-                                navigateToList();
+                                navigateToActivity(EraList.class);
+                                break;
+                            case AUTHOR_LIST:
+                                navigateToActivity(AuthorListActivity.class);
                                 break;
                             case RATE_ON_STORE:
                                 navigateToStore();
@@ -165,7 +170,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                 shareIt();
                                 break;
                             case ABOUT_US:
-                                navigateToAboutUs();
+                                navigateToActivity(AboutActivity.class);
                                 break;
                             case CONTACT:
                                 sendMail();
@@ -204,16 +209,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void navigateToStore() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=" + appId));
-        if (!storaNavigatorSucceeded(intent)) {
+        if (!storeNavigationSucceeded(intent)) {
             //Market (Google play) app seems not installed, let's try to open a webbrowser.
             intent.setData(Uri.parse("https://play.google.com/store/apps/details?" + appId));
-            if (!storaNavigatorSucceeded(intent)) {
+            if (!storeNavigationSucceeded(intent)) {
                 Toast.makeText(this, R.string.play_store_not_opened, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private boolean storaNavigatorSucceeded(Intent aIntent) {
+    private boolean storeNavigationSucceeded(Intent aIntent) {
         try {
             startActivity(aIntent);
             return true;
@@ -222,15 +227,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private void navigateToList() {
-        Intent intent = new Intent(this, DonemListe.class);
+    private void navigateToActivity(Class className) {
+        Intent intent = new Intent(this, className);
         startActivity(intent);
     }
 
-    private void navigateToAboutUs() {
-        Intent intent = new Intent(this, AboutActivity.class);
-        startActivity(intent);
-    }
 
     private void shareIt() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -297,6 +298,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             cursor.moveToNext();
         }
         dataLength = data.length;
+        cursor.close();
     }
 
     /**
@@ -354,17 +356,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @return
      */
     private String getDialogMessage() {
+        String msg = "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>";
         if (!this.era.equals("Bağımsız")) {
-            return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
-                    this.answer + "</b> bir <b>" + this.era + "</b> edebiyatı yazarıdır.";
+            return msg + this.answer + "</b> bir <b>" + this.era + "</b> edebiyatı yazarıdır.";
         } else if (!this.era.equals("Divan Edebiyatı") &&
                 !this.era.equals("Fecr-i Ati Edebiyatı") &&
                 !this.era.equals("Halk Edebiyatı")) {
-            return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
-                    this.answer + "</b> bir <b>" + this.era + "</b> yazarıdır.";
+            return msg + this.answer + "</b> bir <b>" + this.era + "</b> yazarıdır.";
         } else {
-            return "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>" +
-                    this.answer + "</b> bağımsız bir yazardır.";
+            return msg + this.answer + "</b> bağımsız bir yazardır.";
         }
     }
 

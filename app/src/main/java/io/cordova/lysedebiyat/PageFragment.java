@@ -69,10 +69,9 @@ public class PageFragment extends Fragment {
 
             return view;
         } else {
-
             View view = inflater.inflate(R.layout.fragment_yazar_eser_liste, container, false);
             StickyListHeadersListView stickyList = (StickyListHeadersListView) view.findViewById(R.id.yazar_eser_list);
-            YazarEserAdapter adapter = new YazarEserAdapter(getActivity(), data);
+            AuthorBookAdapter adapter = new AuthorBookAdapter(getActivity(), data);
             stickyList.setAdapter(adapter);
             return view;
         }

@@ -1,7 +1,6 @@
 package io.cordova.lysedebiyat;
 
 import android.app.Application;
-import android.content.Context;
 import android.database.SQLException;
 import android.util.Log;
 
@@ -20,21 +19,19 @@ public class MainApplication extends Application {
         // Prepare the database.
         myDbHelper = new DataBaseHelper(this);
         prepareDatabase();
-        Log.d("LYS", "Inst bitti");
     }
 
     protected void prepareDatabase() {
-        Log.d("LYS", "YINE GELDİ GELDİ GELDİ");
         try {
             myDbHelper.createDataBase();
         } catch (IOException ioe) {
-            throw new Error("Unable to create database");
+            throw new Error("Veritabanı yaratılamadı.");
         }
 
         try {
             myDbHelper.openDataBase();
         } catch (SQLException sqle) {
-            throw new Error("DB could not be opened: " + sqle.getMessage());
+            throw new Error("Veritabanı açılamadı: " + sqle.getMessage());
         }
     }
 

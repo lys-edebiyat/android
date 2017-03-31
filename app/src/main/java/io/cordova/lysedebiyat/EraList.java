@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class DonemListe extends BaseActivity {
+import io.cordova.lysedebiyat.SliderHelper.SlidingBaseWithNoBackActivity;
+
+public class EraList extends SlidingBaseWithNoBackActivity {
 
     String data[];
 
@@ -18,11 +19,13 @@ public class DonemListe extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donem_liste);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Yazar Eser Listesi");
-        setSupportActionBar(toolbar);
-
+        setToolbarTitle(this, "Dönemler");
         prepareListData();
+        setView();
+
+    }
+
+    private void setView() {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, R.layout.list_singular, R.id.label, this.data);
@@ -33,7 +36,7 @@ public class DonemListe extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String era = (String) listView.getItemAtPosition(position);
-                navToAct(YazarEserListe.class, era);
+                navToAct(AuthorBookList.class, era);
             }
         });
     }
@@ -62,5 +65,6 @@ public class DonemListe extends BaseActivity {
             i++;
             cursor.moveToNext();
         }
+        cursor.close();
     }
 }

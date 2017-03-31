@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DonemListe"
+            android:name=".EraList"
             android:label="@string/title_activity_yazar_eser_liste"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
@@ -28,8 +28,9 @@
                 android:value="io.cordova.lysedebiyat.MainActivity" />
         </activity>
         <activity android:name=".BaseActivity" />
-        <activity android:name=".YazarEserListe" />
-        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".AuthorBookList" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".AuthorListActivity"></activity>
     </application>
 
 </manifest>
