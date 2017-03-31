@@ -3,7 +3,6 @@ package io.cordova.lysedebiyat;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +10,7 @@ import android.widget.ListView;
 
 import io.cordova.lysedebiyat.SliderHelper.SlidingBaseWithNoBackActivity;
 
-public class EraList extends SlidingBaseWithNoBackActivity {
+public class EraListActivity extends SlidingBaseWithNoBackActivity {
 
     String data[];
 
@@ -36,7 +35,7 @@ public class EraList extends SlidingBaseWithNoBackActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String era = (String) listView.getItemAtPosition(position);
-                navToAct(AuthorBookList.class, era);
+                navToAct(EraBookList.class, era);
             }
         });
     }

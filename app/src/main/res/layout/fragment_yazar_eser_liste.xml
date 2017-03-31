@@ -6,7 +6,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/activity_yazar_eser_liste"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="io.cordova.lysedebiyat.AuthorBookList">
+tools:context="io.cordova.lysedebiyat.EraBookList">
 
 <se.emilsjolander.stickylistheaders.StickyListHeadersListView
     android:id="@+id/yazar_eser_list"

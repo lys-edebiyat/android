@@ -6,17 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary_dark"
-        android:fitsSystemWindows="true"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
+    <include android:id="@+id/toolbar" layout="@layout/toolbar" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -40,7 +30,7 @@
                 android:gravity="center"
                 android:paddingTop="16dp"
                 android:text="@string/about_us_header_one"
-                android:textColor="@color/primary"
+                android:textColor="@color/accent"
                 android:textSize="48sp"
                 android:textStyle="bold" />
 
@@ -50,7 +40,7 @@
                 android:gravity="center"
                 android:paddingBottom="16dp"
                 android:text="@string/about_us_header_two"
-                android:textColor="@color/primary"
+                android:textColor="@color/accent"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -67,6 +57,7 @@
                 android:padding="16dp"
                 android:text="@string/about_us_version_title"
                 android:textSize="24sp"
+                android:textColor="@color/accent"
                 android:textStyle="bold" />
 
             <TextView
@@ -89,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:textColor="@color/accent"
                 android:text="@string/about_us_why_title"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -112,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:textColor="@color/accent"
                 android:text="@string/about_us_details_title"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -135,6 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:textColor="@color/accent"
                 android:text="@string/about_us_developers_title"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -160,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:autoLink="web"
-                android:background="@color/secondary_text"
+                android:background="@color/accent"
                 android:clickable="true"
                 android:linksClickable="true"
                 android:padding="16dp"

@@ -20,9 +20,10 @@
             android:layout_height="match_parent"
             android:background="@color/primary"
             android:gravity="center"
-            android:text=""
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textColor="@color/backgroundColor"
-            android:textSize="24sp" />
+            android:textSize="28sp" />
 
         <ImageView
             android:id="@+id/menuIcon"

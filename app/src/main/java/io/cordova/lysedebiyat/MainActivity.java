@@ -155,7 +155,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                 menu.closeDrawer();
                                 break;
                             case ERA_LIST:
-                                navigateToActivity(EraList.class);
+                                navigateToActivity(EraListActivity.class);
                                 break;
                             case AUTHOR_LIST:
                                 navigateToActivity(AuthorListActivity.class);
@@ -318,11 +318,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         soru.setText(question);
 
         Map<String, Integer> seenChoices = new HashMap<String, Integer>();
-        seenChoices.put(question, 1);
+        seenChoices.put(answer, 1);
 
-        for (int count = 0; count < 3; count++) {
+        for (int i = 0; i < 3; i++) {
             randomIndex = r.nextInt(dataLength);
-            Button button = buttonObjects[count];
+            Button button = buttonObjects[i];
             buttonText = this.data[randomIndex][0];
             while (seenChoices.get(buttonText) != null) {
                 randomIndex = r.nextInt(dataLength);
@@ -357,14 +357,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      */
     private String getDialogMessage() {
         String msg = "<b>" + this.question + "</b> adlı eser <b>" + this.answer + "</b> tarafından yazılmıştır.<br><br> <b>";
-        if (!this.era.equals("Bağımsız")) {
-            return msg + this.answer + "</b> bir <b>" + this.era + "</b> edebiyatı yazarıdır.";
-        } else if (!this.era.equals("Divan Edebiyatı") &&
-                !this.era.equals("Fecr-i Ati Edebiyatı") &&
-                !this.era.equals("Halk Edebiyatı")) {
+        if (this.era.equals("Bağımsız")) {
+            return msg + this.answer + "</b> bağımsız bir yazardır.";
+        } else if (this.era.equals("Divan Edebiyatı") ||
+                this.era.equals("Fecr-i Ati Edebiyatı") ||
+                this.era.equals("Halk Edebiyatı")) {
             return msg + this.answer + "</b> bir <b>" + this.era + "</b> yazarıdır.";
         } else {
-            return msg + this.answer + "</b> bağımsız bir yazardır.";
+            return msg + this.answer + "</b> bir <b>" + this.era + "</b> edebiyatı yazarıdır.";
         }
     }
 

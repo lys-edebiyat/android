@@ -1,4 +1,4 @@
-package io.cordova.lysedebiyat;
+package io.cordova.lysedebiyat.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,31 +7,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import io.cordova.lysedebiyat.R;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-public class AuthorBookAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+public class AlphabeticStickyListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
-    private String[][] data;
+    private String[] countries;
     private LayoutInflater inflater;
 
-    public AuthorBookAdapter(Context context, String data[][]) {
+    public AlphabeticStickyListAdapter(Context context, String[] data) {
         inflater = LayoutInflater.from(context);
-        this.data = data;
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return false;
+        countries = data;
     }
 
     @Override
     public int getCount() {
-        return data.length;
+        return countries.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return data[position];
+        return countries[position];
     }
 
     @Override
@@ -52,7 +48,7 @@ public class AuthorBookAdapter extends BaseAdapter implements StickyListHeadersA
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.text.setText(data[position][1]);
+        holder.text.setText(countries[position]);
 
         return convertView;
     }
@@ -68,17 +64,16 @@ public class AuthorBookAdapter extends BaseAdapter implements StickyListHeadersA
         } else {
             holder = (HeaderViewHolder) convertView.getTag();
         }
-
-        holder.text.setText(data[position][0]);
-
+        //set header text as first char in name
+        String headerText = "" + countries[position].subSequence(0, 1).charAt(0);
+        holder.text.setText(headerText);
         return convertView;
     }
-
 
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return data[position][0].subSequence(0, 1).charAt(0);
+        return countries[position].subSequence(0, 1).charAt(0);
     }
 
     private class HeaderViewHolder {
@@ -88,4 +83,5 @@ public class AuthorBookAdapter extends BaseAdapter implements StickyListHeadersA
     private class ViewHolder {
         TextView text;
     }
+
 }

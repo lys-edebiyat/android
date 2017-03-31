@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import io.cordova.lysedebiyat.Adapters.AuthorBookAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 // In this case, the fragment displays simple text based on the page
@@ -20,9 +21,9 @@ public class PageFragment extends Fragment {
 
     private int mPage;
     private String data[][];
-    private EraInfo eraInfo;
+    private EraInfoActivity eraInfo;
 
-    public static PageFragment newInstance(int page, String[][] bookList, EraInfo eraInfo) {
+    public static PageFragment newInstance(int page, String[][] bookList, EraInfoActivity eraInfo) {
         Bundle args = new Bundle();
 
         // Put tha arguments to pass to the fragment.
@@ -40,7 +41,7 @@ public class PageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
         data = (String[][]) getArguments().getSerializable(BOOK_LIST);
-        eraInfo = (EraInfo) getArguments().getSerializable(ERA_INFO);
+        eraInfo = (EraInfoActivity) getArguments().getSerializable(ERA_INFO);
     }
 
     // Inflate the fragment layout we defined above for this fragment

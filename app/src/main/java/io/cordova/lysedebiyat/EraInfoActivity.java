@@ -2,12 +2,12 @@ package io.cordova.lysedebiyat;
 
 import java.io.Serializable;
 
-public class EraInfo implements Serializable {
+public class EraInfoActivity implements Serializable {
     private String info;
     private String authors;
     private String link;
 
-    public EraInfo(String info, String authors, String link) {
+    public EraInfoActivity(String info, String authors, String link) {
         this.info = info;
         this.link = link;
 

@@ -9,9 +9,9 @@ public class TabFragmentAdapter extends FragmentPagerAdapter {
     private String tabTitles[] = new String[]{"Dönem Bilgisi", "Eserler"};
 
     private String bookList[][];
-    private EraInfo eraInfo;
+    private EraInfoActivity eraInfo;
 
-    public TabFragmentAdapter(FragmentManager fm, String bookList[][], EraInfo eraInfo) {
+    public TabFragmentAdapter(FragmentManager fm, String bookList[][], EraInfoActivity eraInfo) {
         super(fm);
         this.bookList = bookList;
         this.eraInfo = eraInfo;

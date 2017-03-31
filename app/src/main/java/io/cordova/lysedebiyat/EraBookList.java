@@ -9,10 +9,10 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import io.cordova.lysedebiyat.SliderHelper.SlidingBaseActivity;
 
-public class AuthorBookList extends SlidingBaseActivity {
+public class EraBookList extends SlidingBaseActivity {
 
     private String[][] data;
-    private EraInfo eraInfo;
+    private EraInfoActivity eraInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class AuthorBookList extends SlidingBaseActivity {
         String info = cursor.getString(0);
         String authors = cursor.getString(1);
         String link = cursor.getString(2);
-        eraInfo = new EraInfo(info, authors, link);
+        eraInfo = new EraInfoActivity(info, authors, link);
         cursor.close();
     }
 }
