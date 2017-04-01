@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
@@ -41,6 +42,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     TextView soru;
     Button[] buttonObjects;
 
+    // Data properties
     String data[][];
     int dataLength;
     String answer;
@@ -48,6 +50,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     String era;
 
     MaterialStyledDialog.Builder dialog;
+
+    boolean doubleBackToExitPressedOnce = false;
 
     private enum MenuItems {
         BACK_TO_HOME,
@@ -84,7 +88,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void prepareDrawer(Activity activity) {
 
         // Set the drawer items.
-        final PrimaryDrawerItem backToHome = new PrimaryDrawerItem()
+        PrimaryDrawerItem backToHome = new PrimaryDrawerItem()
                 .withIdentifier(MenuItems.BACK_TO_HOME.ordinal())
                 .withName(R.string.back_to_game)
                 .withIcon(GoogleMaterial.Icon.gmd_home);
@@ -129,6 +133,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .withActivity(activity)
                 .withDividerBelowHeader(true)
                 .build();
+
 
         // Create the drawer and remember the `Drawer` result object
         menu = new DrawerBuilder()
@@ -249,6 +254,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             this.displaySuccess();
         } else {
             this.displayFailure();
+        }
+    }
+
+    /**
+     * Exit from the application if back is pressed two times in 2 seconds.
+     */
+    @Override
+    public void onBackPressed() {
+        if (menu.isDrawerOpen()) {
+            menu.closeDrawer();
+        } else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            showToast("Çıkmak için tekrar geri tuşuna basın.");
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
         }
     }
 
@@ -392,7 +422,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @param text
      */
     private void showToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     @SuppressWarnings("deprecation")

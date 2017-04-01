@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import io.cordova.lysedebiyat.Adapters.TabFragmentAdapter;
 import io.cordova.lysedebiyat.SliderHelper.SlidingBaseActivity;
 
 public class EraBookList extends SlidingBaseActivity {

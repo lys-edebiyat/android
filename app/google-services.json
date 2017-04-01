@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "208815421419",
+    "firebase_url": "https://lys-edebiyat-9068a.firebaseio.com",
+    "project_id": "lys-edebiyat-9068a",
+    "storage_bucket": "lys-edebiyat-9068a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208815421419:android:4340fe4a6b45a5c8",
+        "android_client_info": {
+          "package_name": "io.cordova.lysedebiyat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208815421419-1uivi6e5jc3okq5l7pgokeeu3637sv4g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO2kzh_y1uLL4t4wmx2FK3Q_65EpmZnL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

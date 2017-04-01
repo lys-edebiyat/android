@@ -2,7 +2,6 @@ package io.cordova.lysedebiyat;
 
 import android.app.Application;
 import android.database.SQLException;
-import android.util.Log;
 
 import java.io.IOException;
 

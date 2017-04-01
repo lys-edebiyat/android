@@ -12,22 +12,34 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class AlphabeticStickyListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
-    private String[] countries;
+    private String[] data;
     private LayoutInflater inflater;
+    private Boolean isClickable = true;
 
     public AlphabeticStickyListAdapter(Context context, String[] data) {
         inflater = LayoutInflater.from(context);
-        countries = data;
+        this.data = data;
+    }
+
+    public AlphabeticStickyListAdapter(Context context, String[] data, Boolean isClickable) {
+        inflater = LayoutInflater.from(context);
+        this.data = data;
+        this.isClickable = isClickable;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return isClickable;
     }
 
     @Override
     public int getCount() {
-        return countries.length;
+        return data.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return countries[position];
+        return data[position];
     }
 
     @Override
@@ -48,7 +60,7 @@ public class AlphabeticStickyListAdapter extends BaseAdapter implements StickyLi
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.text.setText(countries[position]);
+        holder.text.setText(data[position]);
 
         return convertView;
     }
@@ -65,7 +77,7 @@ public class AlphabeticStickyListAdapter extends BaseAdapter implements StickyLi
             holder = (HeaderViewHolder) convertView.getTag();
         }
         //set header text as first char in name
-        String headerText = "" + countries[position].subSequence(0, 1).charAt(0);
+        String headerText = "" + data[position].subSequence(0, 1).charAt(0);
         holder.text.setText(headerText);
         return convertView;
     }
@@ -73,7 +85,7 @@ public class AlphabeticStickyListAdapter extends BaseAdapter implements StickyLi
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return countries[position].subSequence(0, 1).charAt(0);
+        return data[position].subSequence(0, 1).charAt(0);
     }
 
     private class HeaderViewHolder {

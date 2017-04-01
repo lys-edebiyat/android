@@ -1,8 +1,11 @@
-package io.cordova.lysedebiyat;
+package io.cordova.lysedebiyat.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import io.cordova.lysedebiyat.EraInfoActivity;
+import io.cordova.lysedebiyat.PageFragment;
 
 public class TabFragmentAdapter extends FragmentPagerAdapter {
     private int PAGE_COUNT = 2;

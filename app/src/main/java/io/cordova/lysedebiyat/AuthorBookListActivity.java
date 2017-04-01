@@ -2,12 +2,6 @@ package io.cordova.lysedebiyat;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
-
-import com.astuetz.PagerSlidingTabStrip;
 
 import io.cordova.lysedebiyat.Adapters.AlphabeticStickyListAdapter;
 import io.cordova.lysedebiyat.SliderHelper.SlidingBaseActivity;
@@ -31,9 +25,10 @@ public class AuthorBookListActivity extends SlidingBaseActivity {
         setView();
 
     }
+
     private void setView() {
         final StickyListHeadersListView stickyList = (StickyListHeadersListView) findViewById(R.id.list);
-        AlphabeticStickyListAdapter adapter = new AlphabeticStickyListAdapter(this, data);
+        AlphabeticStickyListAdapter adapter = new AlphabeticStickyListAdapter(this, data, false);
         stickyList.setAdapter(adapter);
     }
 
