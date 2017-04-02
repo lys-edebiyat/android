@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_light"
+    android:orientation="vertical"
+    android:weightSum="3"
     tools:context="io.cordova.lysedebiyat.MainActivity">
-
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/soruWrapper"
         android:layout_width="fill_parent"
-        android:layout_height="300dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="2.6"
+        android:background="@color/primary"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/soru"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primary"
             android:gravity="center"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:textColor="@color/backgroundColor"
             android:textSize="28sp" />
 
@@ -29,37 +30,44 @@
             android:id="@+id/menuIcon"
             android:layout_width="49dp"
             android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:maxHeight="75dp"
             android:maxWidth="75dp"
             android:src="@drawable/ic_menu_white_24dp" />
+
+        <TextView
+            android:id="@+id/correctAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:textColor="@color/backgroundColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/wrongAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:textColor="@color/backgroundColor"
+            android:textSize="14sp" />
 
     </FrameLayout>
 
     <Button
         android:id="@+id/cevap1"
         style="@style/answerCardView"
-        android:layout_below="@+id/soruWrapper"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/cevap2"
-        style="@style/answerCardView"
-        android:layout_below="@+id/cevap1"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp" />
+        style="@style/answerCardView" />
 
     <Button
         android:id="@+id/cevap3"
-        style="@style/answerCardView"
-        android:layout_below="@+id/cevap2"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp" />
+        style="@style/answerCardView" />
 
 
-</RelativeLayout>
+</LinearLayout>

@@ -40,7 +40,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     static final String appId = "io.cordova.lysedebiyat";
     static final String appWebUrl = "https://lys-edebiyat.github.io/";
 
+    // Stats counters
+    protected int correctCount = 0;
+    protected int wrongCount = 0;
+    protected Boolean isCorrectKnown = false;
+
     // UI Elements
+    TextView correctAnswer;
+    TextView wrongAnswer;
     TextView soru;
     Button[] buttonObjects;
 
@@ -70,6 +77,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         soru = (TextView) findViewById(R.id.soru);
 
         dialog = new MaterialStyledDialog.Builder(this)
@@ -77,14 +85,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        if (isCorrectKnown) {
+                            correctAnswer.setText(getString(R.string.correct_answer_label, correctCount));
+                        } else {
+                            wrongAnswer.setText(getString(R.string.wrong_answer_label, wrongCount));
+                        }
                         createQuestion();
                     }
                 });
 
         prepareQuestionData();
         prepareButtonBindings();
+        initAnswerCounts();
         createQuestion();
         prepareDrawer(this);
+    }
+
+    private void initAnswerCounts() {
+        correctAnswer = (TextView) findViewById(R.id.correctAnswer);
+        wrongAnswer = (TextView) findViewById(R.id.wrongAnswer);
+
+        correctAnswer.setText(getString(R.string.correct_answer_label, correctCount));
+        wrongAnswer.setText(getString(R.string.wrong_answer_label, wrongCount));
     }
 
     protected void prepareDrawer(Activity activity) {
@@ -247,9 +269,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void shareIt() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "LYS Edebiyat Yazar - Eser");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "LYS Edebiyat Yazar - Eser Bilgi Yarışması'nı hemen indir!");
-        startActivity(Intent.createChooser(sharingIntent, "Şununla paylaş"));
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, R.string.app_name);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.share_text));
+        startActivity(Intent.createChooser(sharingIntent,getString(R.string.share_dialog_title)));
     }
 
     @Override
@@ -376,6 +398,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * Display failure message.
      */
     private void displayFailure() {
+        wrongCount++;
+        isCorrectKnown = false;
         showMessage(R.color.dialogHeaderWrong, "Yanlış cevap :(", getDialogMessage());
     }
 
@@ -383,6 +407,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * Display success message.
      */
     private void displaySuccess() {
+        correctCount++;
+        isCorrectKnown = true;
+        correctAnswer.setText(getString(R.string.correct_answer_label, correctCount));
         showMessage(R.color.dialogHeaderCorrect, "Doğru cevap!", getDialogMessage());
     }
 

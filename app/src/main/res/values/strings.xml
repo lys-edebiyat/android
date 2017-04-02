@@ -1,6 +1,93 @@
 <resources>
-    <string name="app_name">lysedebiyat</string>
+    <string name="app_name">LYS Edebiyat Yazar - Eser Bilgi Yarışması</string>
+
+    <string name="sweet_alert_next_question">Sıradaki Soru</string>
+
+    <string name="bullet_point">• </string>
+    <string name="github_url">https://github.com/lys-edebiyat</string>
+
+    <string name="correct_answer_label">Doğru: %1$d</string>
+    <string name="wrong_answer_label">Yanlış: %1$d</string>
     <string name="title_activity_yazar_eser_liste">YazarEserListe</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <string name="share_text">
+        Süper bir uygulama buldum! Adı "LYS Edebiyat Yazar - Eser Bilgi Yarışması".
+        İndir, beraber oynayalım.\n\n
+        Appstore: https://appsto.re/tr/SA1agb \n\n
+        Play Store: https://play.google.com/store/apps/details?id=io.cordova.lysedebiyat\n\n
+        Web: http://lys-edebiyat.github.io
+    </string>
+    <string name="share_dialog_title">Arkadaşlarınla Paylaş</string>
+
+
+    <!-- Menu Titles -->
+    <string name="back_to_game"><b>Oyuna dön</b></string>
+    <string name="era_list_title"><b>Dönem Listesi</b></string>
+    <string name="author_list_title"><b>Yazar Listesi</b></string>
+    <string name="open_in_web"><b>Tarayıcıda Aç</b></string>
+    <string name="share"><b>Paylaş</b></string>
+    <string name="rate_on_store"><b>Puan Ver</b></string>
+    <string name="about_us"><b>Hakkında</b></string>
+    <string name="contact_us"><b>İletişim</b></string>
+    <string name="settings"><b>Ayarlar</b></string>
+    <!-- Menu Titles End -->
+
+    <!-- About Us -->
+    <string name="about_us_title">Hakkında</string>
+    <string name="about_us_header_one">LYS Edebiyat</string>
+    <string name="about_us_header_two">Yazar - Eser\nBilgi Yarışması</string>
+    <string name="about_us_version_title"><u>Sürüm Bilgisi</u></string>
+    <string name="about_us_version_number">v2.0.0</string>
+    <string name="about_us_version_content">
+        <b>v2.0.0</b> numaralı sürümü kullanıyorsun gibi görünüyor. Bu sürümle beraber uygulamayı tamamen baştan
+        yazdık, daha hızlı ve daha kullanışlı hale getirdik. Artık uygulama içerisinde dönemlere ayrılmış
+        yazar ve eserlere ulaşabilirsin. Bununla beraber artık oyunu arkadaşlarınla da paylaşabileceksin.
+        Hazırladığımız bu yeni altyapı sayesinde daha hızlı bir şekilde güncelleme hazırlamayı umuyoruz.
+    </string>
+    <string name="about_us_authors">Burak Karakan &amp; Furkan Hatipoğlu</string>
+    <string name="about_us_why_title"><u>Neden var?</u></string>
+    <string name="about_us_why_content">
+        LYS Edebiyat Yazar Kitap Bilgi Yarışması elimizde bulunan
+        bir veri setini kullanışlı hale getirmek üzere tasarladığımız bir proje aslen. Yazarların ve
+        eserlerin bulunduğu bu veri setini çeşitli işlemlerden geçirerek uygulamanın ilk halini hazırladık.
+        Arkasından zaman içerisinde adım adım geliştirmeye devam ettik, dönemlere dair bilgiler derledik,
+        uygulamaları daha kullanışlı hale getirmeye çalıştık, geri bildirimler sayesinde veri setimizdeki hataları
+        düzelttik, yeni eser ve yazarlar ekledik. Bugün iOS ve Android platformlarında on binlerce öğrencinin
+        kullandığı bir uygulama haline geldi bu proje, büyümeye de devam ediyor. \n\n
+
+        Başından beri bu uygulamanın öğrencilere faydalı olması için çabaladık.
+        <u>Şu an için uygulamadan herhangi bir gelirimiz yok,
+        vakit ayırabildikçe geliştirmeye çalışıyoruz sadece.</u> Dolayısıyla
+        yeni özellikler eklemek, hataları düzeltmek gibi güncellemeleri sunmamız biraz vakit alabiliyor.
+        Bu süreçte anlayışlı olduğunuz için teşekkür ederiz.
+    </string>
+    <string name="about_us_details_title"><u>Nasıl geliştiriyoruz?</u></string>
+    <string name="about_us_details_content">
+        Uygulamaların tümünü açık kaynak olarak geliştiriyoruz, yani kullandığımız tüm uygulama kodları
+        GitHub üzerinden erişilebilir durumda. Aynı şekilde oyun içerisindeki soruları oluştururken
+        kullandığımız veri setimizi de tamamen açık kaynak olarak GitHub\'da tutuyoruz. Dolayısıyla,
+        aklında olan bir özelliği sen de uygulamalara ekleyebilirsin; aynı şekilde elinde
+        farklı veri setleri var ise veya hatalı bir veriyi düzeltmek istersen yine GitHub üzerinden
+        düzeltme yapabilirsin.
+    </string>
+    <string name="view_on_github">GitHub\'da Görüntüle</string>
+    <string name="about_us_developers_title"><u>Geliştiriciler</u></string>
+    <string name="about_us_developers_content">Burak Karakan &amp; Furkan Hatipoğlu</string>
+    <!-- About Us End -->
+
+    <string name="important_authors"><u>Önemli Yazarlar</u></string>
+    <string name="detailed_info">Daha detaylı bilgi için tıklayın</string>
+
+    <string name="play_store_not_opened">Üzgünüm, Play Store açılamadı.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settings">Ayarlar</string>
+
+    <!-- Placeholder Texts -->
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -89,7 +176,8 @@
         "On the layout level, design your app layout to minimize opportunities for interference. "
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
-    </string><string name="short_text">
+    </string>
+    <string name="short_text">
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -100,9 +188,5 @@
         "flexibility of the material creates new affordances that supercede those in the physical "
         "world, without breaking the rules of physics.\n"
     </string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
