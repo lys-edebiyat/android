@@ -41,24 +41,25 @@
     <string name="about_us_header_two">Yazar - Eser\nBilgi Yarışması</string>
     <string name="about_us_version_title"><u>Sürüm Bilgisi</u></string>
     <string name="about_us_version_number">v2.0.0</string>
-    <string name="about_us_version_content">
-        <b>v2.0.0</b> numaralı sürümü kullanıyorsun gibi görünüyor. Bu sürümle beraber uygulamayı tamamen baştan
-        yazdık, daha hızlı ve daha kullanışlı hale getirdik. Artık uygulama içerisinde dönemlere ayrılmış
-        yazar ve eserlere ulaşabilirsin. Bununla beraber artık oyunu arkadaşlarınla da paylaşabileceksin.
-        Hazırladığımız bu yeni altyapı sayesinde daha hızlı bir şekilde güncelleme hazırlamayı umuyoruz.
+    <string name="about_us_version_content"><b>v2.0.0</b> numaralı sürümü kullanıyorsun gibi görünüyor.
+        Bu sürümle beraber uygulamayı tamamen baştan
+        yazdık, daha hızlı ve daha kullanışlı hale getirdik.\n\nArtık uygulama içerisinde <b>\"Dönem Listesi\"</b>
+        sekmesinden dönemlerine göre ayrılmış yazar ve eserlere ulaşabilirsin.
+        Aynı şekilde <b>\"Yazar Listesi\"</b> sekmesinden de tüm yazarlar ve
+        eserlerinin alfabetik olarak sıralı haline ulaşabilirsin.
+        Bununla beraber artık uygulamayı arkadaşlarınla da paylaşabileceksin, menüdeki <b>\"Paylaş\"</b> butonunu denemeni
+        öneriyoruz.
+        Hazırladığımız bu yeni altyapı sayesinde daha hızlı bir şekilde güncelleme yayınlamayı umuyoruz.
     </string>
     <string name="about_us_authors">Burak Karakan &amp; Furkan Hatipoğlu</string>
     <string name="about_us_why_title"><u>Neden var?</u></string>
-    <string name="about_us_why_content">
-        LYS Edebiyat Yazar Kitap Bilgi Yarışması elimizde bulunan
+    <string name="about_us_why_content">LYS Edebiyat Yazar Kitap Bilgi Yarışması elimizde bulunan
         bir veri setini kullanışlı hale getirmek üzere tasarladığımız bir proje aslen. Yazarların ve
         eserlerin bulunduğu bu veri setini çeşitli işlemlerden geçirerek uygulamanın ilk halini hazırladık.
         Arkasından zaman içerisinde adım adım geliştirmeye devam ettik, dönemlere dair bilgiler derledik,
         uygulamaları daha kullanışlı hale getirmeye çalıştık, geri bildirimler sayesinde veri setimizdeki hataları
         düzelttik, yeni eser ve yazarlar ekledik. Bugün iOS ve Android platformlarında on binlerce öğrencinin
-        kullandığı bir uygulama haline geldi bu proje, büyümeye de devam ediyor. \n\n
-
-        Başından beri bu uygulamanın öğrencilere faydalı olması için çabaladık.
+        kullandığı bir uygulama haline geldi bu proje, büyümeye de devam ediyor.\n\nBaşından beri bu uygulamanın öğrencilere faydalı olması için çabaladık.
         <u>Şu an için uygulamadan herhangi bir gelirimiz yok,
         vakit ayırabildikçe geliştirmeye çalışıyoruz sadece.</u> Dolayısıyla
         yeni özellikler eklemek, hataları düzeltmek gibi güncellemeleri sunmamız biraz vakit alabiliyor.
