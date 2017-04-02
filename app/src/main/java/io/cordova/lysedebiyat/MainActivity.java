@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
@@ -106,7 +108,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         PrimaryDrawerItem rateOnStore = new PrimaryDrawerItem()
                 .withIdentifier(MenuItems.RATE_ON_STORE.ordinal())
                 .withName(R.string.rate_on_store)
-                .withIcon(GoogleMaterial.Icon.gmd_rate_review);
+                .withIcon(GoogleMaterial.Icon.gmd_star_border);
 
         PrimaryDrawerItem openInWeb = new PrimaryDrawerItem()
                 .withIdentifier(MenuItems.OPEN_IN_WEB.ordinal())
@@ -131,6 +133,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
+                .withHeaderBackground(R.drawable.icon)
+                .withHeaderBackgroundScaleType(ImageView.ScaleType.CENTER_CROP)
                 .withDividerBelowHeader(true)
                 .build();
 
@@ -145,9 +149,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         backToHome,
                         eraList,
                         authorList,
+                        new DividerDrawerItem(),
                         rateOnStore,
                         share,
                         openInWeb,
+                        new DividerDrawerItem(),
                         aboutUs,
                         contact
                 )
@@ -196,7 +202,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         deviceInfo += "Model: " + Build.MODEL + "\n";
         deviceInfo += "Product: " + Build.PRODUCT + "\n";
 
-        String mailContent = "Merhaba. Oyuna dair şöyle bir bildirim sağlamak istiyorum:\n\n\n\n";
+        String mailContent = "Merhaba. Oyuna dair şöyle bir önerim var:\n\n\n\n";
         mailContent += deviceInfo;
 
         Intent i = new Intent(Intent.ACTION_SEND);
