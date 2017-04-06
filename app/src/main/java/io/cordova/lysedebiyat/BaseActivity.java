@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.materialdrawer.Drawer;
+
+import io.cordova.lysedebiyat.DatabaseHelpers.DataBaseHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

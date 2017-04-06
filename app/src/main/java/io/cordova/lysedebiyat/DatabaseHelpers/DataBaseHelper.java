@@ -1,4 +1,4 @@
-package io.cordova.lysedebiyat;
+package io.cordova.lysedebiyat.DatabaseHelpers;
 
 import android.content.Context;
 import android.database.Cursor;

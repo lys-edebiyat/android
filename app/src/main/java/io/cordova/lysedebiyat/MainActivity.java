@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,6 +35,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import io.cordova.lysedebiyat.DatabaseHelpers.StatsDatabaseHelper;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -58,6 +61,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     String question;
     String era;
 
+    StatsDatabaseHelper statDb;
+    long unixTime = System.currentTimeMillis() / 1000L;
+
     MaterialStyledDialog.Builder dialog;
 
     boolean doubleBackToExitPressedOnce = false;
@@ -77,10 +83,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        statDb = new StatsDatabaseHelper(this);
 
         soru = (TextView) findViewById(R.id.soru);
 
         dialog = new MaterialStyledDialog.Builder(this)
+                .setCancelable(false)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    }
+                })
                 .setStyle(Style.HEADER_WITH_TITLE)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -99,6 +112,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initAnswerCounts();
         createQuestion();
         prepareDrawer(this);
+    }
+
+    protected void onPause() {
+        super.onPause();
+        statDb.saveLastScores(unixTime, correctCount, wrongCount);
+        Log.d("LYS", "SUCCESS IN DB INSERTION");
     }
 
     private void initAnswerCounts() {
