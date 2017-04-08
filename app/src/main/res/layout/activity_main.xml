@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="2.6"
         android:background="@color/primary"
-        android:padding="16dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/soru"
@@ -67,7 +67,7 @@
 
     <Button
         android:id="@+id/cevap3"
-        style="@style/answerCardView" />
+        style="@style/answerCardView"/>
 
 
 </LinearLayout>

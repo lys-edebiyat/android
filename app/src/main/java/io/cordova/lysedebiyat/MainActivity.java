@@ -117,7 +117,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onPause() {
         super.onPause();
         statDb.saveLastScores(unixTime, correctCount, wrongCount);
-        Log.d("LYS", "SUCCESS IN DB INSERTION");
     }
 
     private void initAnswerCounts() {

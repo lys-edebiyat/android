@@ -56,7 +56,7 @@ public class StatsDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertScores() {
-        String query = "INSERT INTO " + TABLE_NAME +
+        String query = "INSERT OR REPLACE INTO " + TABLE_NAME +
                 "(" + COLUMN_NAME_TIMESTAMP + "," +
                 COLUMN_NAME_CORRECT_ANSWERS + "," +
                 COLUMN_NAME_WRONG_ANSWERS +
