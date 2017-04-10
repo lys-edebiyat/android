@@ -40,13 +40,13 @@
     <string name="about_us_header_one">LYS Edebiyat</string>
     <string name="about_us_header_two">Yazar - Eser\nBilgi Yarışması</string>
     <string name="about_us_version_title"><u>Sürüm Bilgisi</u></string>
-    <string name="about_us_version_number">v2.0.0</string>
-    <string name="about_us_version_content"><b>v2.0.0</b> numaralı sürümü kullanıyorsun gibi görünüyor.
+    <string name="about_us_version_number">v2.0.3</string>
+    <string name="about_us_version_content"><b>v2.0.3</b> numaralı sürümü kullanıyorsun gibi görünüyor.
         Bu sürümle beraber uygulamayı tamamen baştan
         yazdık, daha hızlı ve daha kullanışlı hale getirdik.\n\nArtık uygulama içerisinde <b>\"Dönem Listesi\"</b>
         sekmesinden dönemlerine göre ayrılmış yazar ve eserlere ulaşabilirsin.
         Aynı şekilde <b>\"Yazar Listesi\"</b> sekmesinden de tüm yazarlar ve
-        eserlerinin alfabetik olarak sıralı haline ulaşabilirsin.
+        eserlerinin alfabetik olarak sıralı haline ulaşabilirsin. Aynı zamanda uygulamanın boyutunu da %95 küçülttük, artık çok daha az yer kaplayacak.
         Bununla beraber artık uygulamayı arkadaşlarınla da paylaşabileceksin, menüdeki <b>\"Paylaş\"</b> butonunu denemeni
         öneriyoruz.
         Hazırladığımız bu yeni altyapı sayesinde daha hızlı bir şekilde güncelleme yayınlamayı umuyoruz.
