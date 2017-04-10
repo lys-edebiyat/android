@@ -7,7 +7,7 @@ android {
         applicationId "io.cordova.lysedebiyat"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 101100
+        versionCode 101102
         versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

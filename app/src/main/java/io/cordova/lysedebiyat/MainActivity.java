@@ -236,6 +236,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void sendMail() {
 
         String deviceInfo = "Sistem bilgilerimi de buraya bırakıyorum:\n";
+        deviceInfo += "App Version: " + getResources().getString(R.string.about_us_version_number) + "\n";
         deviceInfo += "OS: " + System.getProperty("os.version") + "\n";
         deviceInfo += "SDK Version: " + Build.VERSION.SDK_INT + "\n";
         deviceInfo += "Device: " + Build.DEVICE + "\n";
@@ -248,12 +249,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
         i.putExtra(Intent.EXTRA_EMAIL, new String[]{"burak.karakan@gmail.com", "frknhatipoglu@gmail.com"});
-        i.putExtra(Intent.EXTRA_SUBJECT, "LYS Edebiyat İletişim");
+        i.putExtra(Intent.EXTRA_SUBJECT, "LYS Edebiyat Kitap Uygulaması - İletişim");
         i.putExtra(Intent.EXTRA_TEXT, mailContent);
         try {
             startActivity(Intent.createChooser(i, "Mail Gönder"));
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "Yüklenmiş bir e-mail programı bulunamadı.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Yüklenmiş bir e-mail uygulaması bulunamadı.", Toast.LENGTH_SHORT).show();
         }
     }
 

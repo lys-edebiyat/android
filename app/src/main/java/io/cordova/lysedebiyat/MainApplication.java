@@ -23,11 +23,6 @@ public class MainApplication extends Application {
     }
 
     protected void prepareDatabase() {
-        try {
-            myDbHelper.createDataBase();
-        } catch (IOException ioe) {
-            throw new Error("Veritabanı yaratılamadı.");
-        }
 
         try {
             myDbHelper.openDataBase();

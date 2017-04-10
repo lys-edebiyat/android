@@ -12,6 +12,7 @@
     <color name="dialogHeaderWrong">#f85f73</color>
     <color name="dialogHeaderCorrect">#4CAF50</color>
     <color name="backgroundColor">#FFFFFF</color>
+    <color name="iconBackgroundColor">#f85f73</color>
 
     <!-- MaterialDrawer DEFAULT colors -->
     <color name="material_drawer_background">#F9F9F9</color>

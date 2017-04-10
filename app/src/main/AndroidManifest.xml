@@ -12,6 +12,15 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
         <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter android:label="LYS Edebiyat">
