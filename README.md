@@ -1,0 +1,4 @@
+# LYS Edebiyat Android Application
+This repo contains the native version of the application. The previous one was a hybrid implementation that was built with Apache Cordova, however it increased the APK size with the need of embedding the Chrome APK in it in order to give better support to older devices and it was harder to maintain it. Therefore the need for a native version was born.
+  
+This implementation uses the native APIs completely, and tries to keep a minimal and useful UI accross the application. The size of the APK in the store is 2.83MB, which is significantly smaller than the previous APK size, more than 50MB, and approximately 80MB when installed. This repo will be the one that is going to be maintained.
