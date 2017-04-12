@@ -79,7 +79,7 @@ public class AuthorBookAdapter extends BaseAdapter implements StickyListHeadersA
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return data[position][0].subSequence(0, 1).charAt(0);
+        return data[position][0].hashCode();
     }
 
     private class HeaderViewHolder {
