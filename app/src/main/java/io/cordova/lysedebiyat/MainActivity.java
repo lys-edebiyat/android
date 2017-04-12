@@ -14,8 +14,11 @@ import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -70,6 +74,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private enum MenuItems {
         BACK_TO_HOME,
+        ERA_SELECTION,
         ERA_LIST,
         AUTHOR_LIST,
         OPEN_IN_WEB,
@@ -119,6 +124,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         statDb.saveLastScores(unixTime, correctCount, wrongCount);
     }
 
+    protected void createEraSelectionDialog() {
+
+
+        View dialogLayout = getLayoutInflater().inflate(R.layout.era_selection_dialog_view, null);
+        ListView listview = (ListView) dialogLayout.findViewById(R.id.listView1);
+
+        //string array
+        String[] foody = {"pizza", "burger", "chocolate", "ice-cream", "banana", "apple"};
+        // set adapter for listview
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.era_selection_dialog_item, foody);
+        listview.setAdapter(adapter);
+        listview.setItemsCanFocus(false);
+        // we want multiple clicks
+        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        new MaterialStyledDialog.Builder(this)
+                .setTitle("Dönem Seç")
+                .setStyle(Style.HEADER_WITH_TITLE)
+                .setHeaderColor(R.color.accent)
+                .setCustomView(dialogLayout, 20, 20, 20, 20)
+                .setPositiveText(R.string.sweet_alert_next_question)
+                .show();
+    }
+
     private void initAnswerCounts() {
         correctAnswer = (TextView) findViewById(R.id.correctAnswer);
         wrongAnswer = (TextView) findViewById(R.id.wrongAnswer);
@@ -134,6 +165,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .withIdentifier(MenuItems.BACK_TO_HOME.ordinal())
                 .withName(R.string.back_to_game)
                 .withIcon(GoogleMaterial.Icon.gmd_home);
+
+        // Set the drawer items.
+        PrimaryDrawerItem eraSelection = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.ERA_SELECTION.ordinal())
+                .withName(R.string.era_selection_title)
+                .withIcon(GoogleMaterial.Icon.gmd_check_box);
 
         PrimaryDrawerItem eraList = new PrimaryDrawerItem()
                 .withIdentifier(MenuItems.ERA_LIST.ordinal())
@@ -187,6 +224,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .withSelectedItem(-1)
                 .addDrawerItems(
                         backToHome,
+                        eraSelection,
                         eraList,
                         authorList,
                         new DividerDrawerItem(),
@@ -204,6 +242,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         switch (m[view.getId()]) {
                             case BACK_TO_HOME:
                                 menu.closeDrawer();
+                                break;
+                            case ERA_SELECTION:
+                                createEraSelectionDialog();
                                 break;
                             case ERA_LIST:
                                 navigateToActivity(EraListActivity.class);
@@ -290,7 +331,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, R.string.app_name);
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.share_text));
-        startActivity(Intent.createChooser(sharingIntent,getString(R.string.share_dialog_title)));
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_dialog_title)));
     }
 
     @Override

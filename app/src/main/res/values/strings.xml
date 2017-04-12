@@ -25,6 +25,7 @@
 
     <!-- Menu Titles -->
     <string name="back_to_game"><b>Oyuna dön</b></string>
+    <string name="era_selection_title"><b>Dönem Seç</b></string>
     <string name="era_list_title"><b>Dönem Listesi</b></string>
     <string name="author_list_title"><b>Yazar Listesi</b></string>
     <string name="open_in_web"><b>Tarayıcıda Aç</b></string>
