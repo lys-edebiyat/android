@@ -3,8 +3,8 @@ package io.cordova.lysedebiyat;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,12 +12,11 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,17 +34,19 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Random;
 
 import io.cordova.lysedebiyat.DatabaseHelpers.StatsDatabaseHelper;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    static final String appId = "io.cordova.lysedebiyat";
-    static final String appWebUrl = "https://lys-edebiyat.github.io/";
+    static final String APP_ID = "io.cordova.lysedebiyat";
+    static final String APP_WEB_URL = "https://lys-edebiyat.github.io/";
+    static final String PREFS_NAME = "LYSPrefs";
+    static final String ERA_LIST_KEY = "selectedEras";
 
     // Stats counters
     protected int correctCount = 0;
@@ -60,10 +61,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     // Data properties
     String data[][];
-    int dataLength;
     String answer;
     String question;
     String era;
+
+    String eraList[];
+    HashSet<String> selectedEras;
+
+    SharedPreferences settings;
+
 
     StatsDatabaseHelper statDb;
     long unixTime = System.currentTimeMillis() / 1000L;
@@ -130,16 +136,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         View dialogLayout = getLayoutInflater().inflate(R.layout.era_selection_dialog_view, null);
         ListView listview = (ListView) dialogLayout.findViewById(R.id.listView1);
 
-        //string array
-        String[] foody = {"pizza", "burger", "chocolate", "ice-cream", "banana", "apple"};
         // set adapter for listview
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.era_selection_dialog_item, foody);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.era_selection_dialog_item, eraList);
         listview.setAdapter(adapter);
         listview.setItemsCanFocus(false);
-        // we want multiple clicks
         listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+
+        for (int i = 0; i < eraList.length; i++) {
+            if (selectedEras.contains(eraList[i])) {
+                listview.setItemChecked(i, true);
+            }
+        }
 
         new MaterialStyledDialog.Builder(this)
                 .setTitle("Dönem Seç")
@@ -147,7 +155,38 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .setHeaderColor(R.color.accent)
                 .setCustomView(dialogLayout, 20, 20, 20, 20)
                 .setPositiveText(R.string.sweet_alert_next_question)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        saveSharedPref(dialog);
+                    }
+                })
                 .show();
+    }
+
+    private void saveSharedPref(MaterialDialog dialog) {
+
+        ListView lv = (ListView) dialog.findViewById(R.id.listView1);
+        int count = lv.getAdapter().getCount();
+        SparseBooleanArray checked = lv.getCheckedItemPositions();
+
+        selectedEras.clear();
+
+        for (int i = 0; i < count; i++) {
+            if (checked.get(i)) {
+                selectedEras.add(eraList[i]);
+            }
+        }
+
+        updateQuestionDataSet();
+        createQuestion();
+
+        settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor edit = settings.edit();
+        edit.remove(ERA_LIST_KEY);
+        edit.apply();
+        edit.putStringSet(ERA_LIST_KEY, selectedEras);
+        edit.apply();
     }
 
     private void initAnswerCounts() {
@@ -256,7 +295,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                 navigateToStore();
                                 break;
                             case OPEN_IN_WEB:
-                                navigateToWeb(appWebUrl);
+                                navigateToWeb(APP_WEB_URL);
                                 break;
                             case SHARE:
                                 shareIt();
@@ -301,10 +340,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void navigateToStore() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=" + appId));
+        intent.setData(Uri.parse("market://details?id=" + APP_ID));
         if (!storeNavigationSucceeded(intent)) {
             //Market (Google play) app seems not installed, let's try to open a webbrowser.
-            intent.setData(Uri.parse("https://play.google.com/store/apps/details?" + appId));
+            intent.setData(Uri.parse("https://play.google.com/store/apps/details?" + APP_ID));
             if (!storeNavigationSucceeded(intent)) {
                 Toast.makeText(this, R.string.play_store_not_opened, Toast.LENGTH_SHORT).show();
             }
@@ -397,26 +436,63 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * Perform the SQL query and gather the formatted data.
      */
     private void prepareQuestionData() {
-        Cursor cursor = myDbHelper.query("" +
-                "SELECT yazarlar.yazar, eserler.eser, donemler.donem " +
-                "FROM eserler " +
-                "INNER JOIN yazarlar ON eserler.yazar_id=yazarlar._id " +
-                "INNER JOIN donemler ON yazarlar.donem_id=donemler._id " +
-                "ORDER BY eserler.eser ASC;");
+        Cursor cursor = myDbHelper.query("SELECT donem FROM donemler ORDER BY donem ASC");
+        this.eraList = new String[cursor.getCount()];
+
+        int i = 0;
+        while (cursor.moveToNext()) {
+            this.eraList[i] = cursor.getString(0);
+            i++;
+        }
+
+        settings = getSharedPreferences(PREFS_NAME, 0);
+        selectedEras = (HashSet<String>) settings.getStringSet(ERA_LIST_KEY, null);
+
+        if (selectedEras == null) {
+            selectedEras = new HashSet<String>(Arrays.asList(eraList));
+        }
+
+        updateQuestionDataSet();
+        cursor.close();
+    }
+
+    private void updateQuestionDataSet() {
+        Cursor cursor = myDbHelper.query(constructGameDataQuery());
 
         this.data = new String[cursor.getCount()][3];
-        int i = 0;
 
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
+        int i = 0;
+        while (cursor.moveToNext()) {
             this.data[i][0] = cursor.getString(0);
             this.data[i][1] = cursor.getString(1);
             this.data[i][2] = cursor.getString(2);
             i++;
-            cursor.moveToNext();
         }
-        dataLength = data.length;
+
         cursor.close();
+    }
+
+    private String constructGameDataQuery() {
+        String whereClause = this.queryFilterFromArray(selectedEras);
+        return "SELECT yazarlar.yazar, eserler.eser, donemler.donem " +
+                "FROM eserler " +
+                "INNER JOIN yazarlar ON eserler.yazar_id=yazarlar._id " +
+                "INNER JOIN donemler ON yazarlar.donem_id=donemler._id " +
+                whereClause +
+                " ORDER BY eserler.eser ASC;";
+    }
+
+    private String queryFilterFromArray(HashSet<String> array) {
+        String inClause = "WHERE donemler.donem IN (";
+
+        for (String era : array) {
+            inClause += "'" + era + "',";
+        }
+
+        inClause = inClause.substring(0, inClause.length() - 1);
+        inClause += ")";
+
+        return inClause;
     }
 
     /**
@@ -425,8 +501,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void createQuestion() {
         String buttonText;
         Random r = new Random();
-        int randomIndex = r.nextInt(dataLength);
-        int answerIndex = r.nextInt(3);
+        int randomIndex = r.nextInt(data.length);
+        int answerIndex = -1;
 
         this.answer = this.data[randomIndex][0];
         this.question = this.data[randomIndex][1];
@@ -435,21 +511,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         // Set the question.
         soru.setText(question);
 
-        Map<String, Integer> seenChoices = new HashMap<String, Integer>();
+        HashMap<String, Integer> seenChoices = new HashMap<>();
         seenChoices.put(answer, 1);
 
         for (int i = 0; i < 3; i++) {
-            randomIndex = r.nextInt(dataLength);
+            randomIndex = r.nextInt(data.length);
             Button button = buttonObjects[i];
             buttonText = this.data[randomIndex][0];
             while (seenChoices.get(buttonText) != null) {
-                randomIndex = r.nextInt(dataLength);
+                if (buttonText.equals(answer) && answerIndex == -1) {
+                    answerIndex = i;
+                    break;
+                }
+                randomIndex = r.nextInt(data.length);
                 buttonText = this.data[randomIndex][0];
             }
             seenChoices.put(buttonText, 1);
             button.setText(buttonText);
         }
-
+        if (answerIndex == -1) {
+            answerIndex = r.nextInt(3);
+        }
         Button button = buttonObjects[answerIndex];
         button.setText(this.answer);
     }
