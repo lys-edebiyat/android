@@ -3,8 +3,6 @@ package io.cordova.lysedebiyat;
 import android.app.Application;
 import android.database.SQLException;
 
-import java.io.IOException;
-
 import io.cordova.lysedebiyat.DatabaseHelpers.DataBaseHelper;
 
 public class MainApplication extends Application {
