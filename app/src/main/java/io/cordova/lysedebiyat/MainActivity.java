@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -110,9 +111,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         if (isCorrectKnown) {
-                            correctAnswer.setText(getString(R.string.correct_answer_label, correctCount));
+                            correctAnswer.setText(getString(R.string.dialog_correct_answer, correctCount));
                         } else {
-                            wrongAnswer.setText(getString(R.string.wrong_answer_label, wrongCount));
+                            wrongAnswer.setText(getString(R.string.dialog_wrong_answer, wrongCount));
                         }
                         createQuestion();
                     }
@@ -150,11 +151,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
         new MaterialStyledDialog.Builder(this)
-                .setTitle("Dönem Seç")
+                .setTitle(R.string.dialog_era_selection_title)
                 .setStyle(Style.HEADER_WITH_TITLE)
                 .setHeaderColor(R.color.accent)
                 .setCustomView(dialogLayout, 20, 20, 20, 20)
-                .setPositiveText(R.string.sweet_alert_next_question)
+                .setPositiveText(R.string.dialog_era_selection_save)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -164,16 +165,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .show();
     }
 
-    private void saveSharedPref(MaterialDialog dialog) {
+    private Boolean saveSharedPref(MaterialDialog dialog) {
 
         ListView lv = (ListView) dialog.findViewById(R.id.listView1);
         int count = lv.getAdapter().getCount();
         SparseBooleanArray checked = lv.getCheckedItemPositions();
+        Boolean noErasSelected = true;
+
+
+        for (int i = 0; i < count; i++) {
+            if (checked.get(i)) {
+                noErasSelected = false;
+                break;
+            }
+        }
 
         selectedEras.clear();
 
         for (int i = 0; i < count; i++) {
-            if (checked.get(i)) {
+            if (noErasSelected || checked.get(i)) {
                 selectedEras.add(eraList[i]);
             }
         }
@@ -187,14 +197,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         edit.apply();
         edit.putStringSet(ERA_LIST_KEY, selectedEras);
         edit.apply();
+
+        if (noErasSelected) {
+            showToast("Hiç dönem seçmediğiniz için tüm dönemler dahil edildi.");
+        } else {
+            showToast("Dönem seçiminiz başarıyla güncellendi.");
+        }
+
+        return true;
     }
 
     private void initAnswerCounts() {
         correctAnswer = (TextView) findViewById(R.id.correctAnswer);
         wrongAnswer = (TextView) findViewById(R.id.wrongAnswer);
 
-        correctAnswer.setText(getString(R.string.correct_answer_label, correctCount));
-        wrongAnswer.setText(getString(R.string.wrong_answer_label, wrongCount));
+        correctAnswer.setText(getString(R.string.dialog_correct_answer, correctCount));
+        wrongAnswer.setText(getString(R.string.dialog_wrong_answer, wrongCount));
     }
 
     protected void prepareDrawer(Activity activity) {
@@ -551,7 +569,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void displaySuccess() {
         correctCount++;
         isCorrectKnown = true;
-        correctAnswer.setText(getString(R.string.correct_answer_label, correctCount));
+        correctAnswer.setText(getString(R.string.dialog_correct_answer, correctCount));
         showMessage(R.color.dialogHeaderCorrect, "Doğru cevap!", getDialogMessage());
     }
 
@@ -587,7 +605,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         dialog.setHeaderColor(headerColor)
                 .setTitle(title)
                 .setCustomView(tv, 20, 20, 20, 20)
-                .setPositiveText(R.string.sweet_alert_next_question)
+                .setPositiveText(R.string.dialog_next_question)
                 .show();
     }
 

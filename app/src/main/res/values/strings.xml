@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">LYS Edebiyat Yazar - Eser Bilgi Yarışması</string>
 
-    <string name="sweet_alert_next_question">Sıradaki Soru</string>
 
     <string name="bullet_point">• </string>
     <string name="github_url">https://github.com/lys-edebiyat</string>
 
-    <string name="correct_answer_label">Doğru: %1$d</string>
-    <string name="wrong_answer_label">Yanlış: %1$d</string>
+    <!-- Dialog Strings -->
+    <string name="dialog_next_question">Sıradaki Soru</string>
+    <string name="dialog_correct_answer">Doğru: %1$d</string>
+    <string name="dialog_wrong_answer">Yanlış: %1$d</string>
+    <string name="dialog_era_selection_title">Dönem Seç</string>
+    <string name="dialog_era_selection_save">Kaydet</string>
+    <!-- Dialog Strings End -->
+
     <string name="title_activity_yazar_eser_liste">YazarEserListe</string>
 
     <string name="action_settings">Settings</string>
