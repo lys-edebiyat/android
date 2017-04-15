@@ -23,6 +23,7 @@ public class NavigationHelper {
 
         String deviceInfo = "Sistem bilgilerimi de buraya bırakıyorum:\n";
         deviceInfo += "App Version: " + context.getResources().getString(R.string.about_us_version_number) + "\n";
+        deviceInfo += "DB Version: " + context.getResources().getString(R.string.application_database_version) + "\n";
         deviceInfo += "OS: " + System.getProperty("os.version") + "\n";
         deviceInfo += "SDK Version: " + Build.VERSION.SDK_INT + "\n";
         deviceInfo += "Device: " + Build.DEVICE + "\n";
