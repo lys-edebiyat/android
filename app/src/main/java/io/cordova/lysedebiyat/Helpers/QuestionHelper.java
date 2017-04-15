@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
@@ -19,6 +20,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.github.javiersantos.materialstyleddialogs.enums.Style;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,10 +30,15 @@ import java.util.Random;
 import io.cordova.lysedebiyat.DatabaseHelpers.DataBaseHelper;
 import io.cordova.lysedebiyat.R;
 
+import static android.R.attr.id;
+import static android.R.attr.name;
+
 public class QuestionHelper {
 
     private static final String PREFS_NAME = "LYSPrefs";
     private static final String ERA_LIST_KEY = "selectedEras";
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     protected Context context;
 
@@ -66,8 +73,10 @@ public class QuestionHelper {
             String selectedAnswer = clicked.getText().toString();
             if (answer.equals(selectedAnswer)) {
                 displaySuccess();
+                logAnalyticsEvent("Correct");
             } else {
                 displayFailure();
+                logAnalyticsEvent("Wrong");
             }
         }
     };
@@ -86,6 +95,8 @@ public class QuestionHelper {
 
         soru = (TextView) ((Activity) context).findViewById(R.id.soru);
         settings = context.getSharedPreferences(PREFS_NAME, 0);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
 
         initializeAnswerDialog();
         prepareButtonBindings();
@@ -306,7 +317,6 @@ public class QuestionHelper {
         wrongAnswer.setText(context.getString(R.string.dialog_wrong_answer, wrongCount));
     }
 
-
     /**
      * Create a question based on the dataset.
      */
@@ -365,6 +375,14 @@ public class QuestionHelper {
         isCorrectKnown = true;
         correctAnswer.setText(context.getString(R.string.dialog_correct_answer, correctCount));
         showMessage(R.color.dialogHeaderCorrect, "Doğru cevap!", getDialogMessage());
+    }
+
+    private void logAnalyticsEvent(String eventType){
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, "Question");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, eventType);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "click");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     /**

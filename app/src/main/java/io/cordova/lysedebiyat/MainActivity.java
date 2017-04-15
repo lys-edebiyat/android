@@ -8,6 +8,7 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -34,12 +35,11 @@ public class MainActivity extends BaseActivity {
     QuestionHelper questionHelper;
     NavigationHelper navigationHelper;
 
-    String eraList[];
-    HashSet<String> selectedEras;
     StatsDatabaseHelper statDb;
     long unixTime = System.currentTimeMillis() / 1000L;
 
     boolean doubleBackToExitPressedOnce = false;
+
 
     private enum MenuItems {
         BACK_TO_HOME,
@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
         SHARE,
         RATE_ON_STORE,
         ABOUT_US,
-        CONTACT
+        CONTACT;
     }
 
     @Override
