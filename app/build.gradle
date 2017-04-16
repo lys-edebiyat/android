@@ -7,14 +7,14 @@ android {
         applicationId "io.cordova.lysedebiyat"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 101110
-        versionName "2.0.5"
+        versionCode 101112
+        versionName "2.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

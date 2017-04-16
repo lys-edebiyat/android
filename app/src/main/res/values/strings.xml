@@ -27,7 +27,6 @@
     </string>
     <string name="share_dialog_title">Paylaş</string>
 
-    <string name="application_database_version">2</string>
 
 
     <!-- Menu Titles -->
@@ -48,8 +47,9 @@
     <string name="about_us_header_one">LYS Edebiyat</string>
     <string name="about_us_header_two">Yazar - Eser\nBilgi Yarışması</string>
     <string name="about_us_version_title"><u>Sürüm Bilgisi</u></string>
-    <string name="about_us_version_number">v2.0.5</string>
-    <string name="about_us_version_content"><b>v2.0.5</b> numaralı sürümü kullanıyorsun gibi görünüyor.
+    <string name="application_database_version">3</string>
+    <string name="about_us_version_number">v2.0.6</string>
+    <string name="about_us_version_content"><b>v2.0.6</b> numaralı sürümü kullanıyorsun gibi görünüyor.
         Bu sürümde <b>dönem seçme özelliğini getirdik</b>. Ek olarak veri setinde bazı güncellemeler yaptık.\n\nGenel olarak
         v2 sürümüyle beraber uygulamayı tamamen baştan
         yazdık, daha hızlı ve daha kullanışlı hale getirdik.\n\nArtık uygulama içerisinde <b>\"Dönem Listesi\"</b>
