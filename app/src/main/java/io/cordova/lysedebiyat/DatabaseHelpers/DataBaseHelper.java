@@ -20,7 +20,7 @@ import static android.content.ContentValues.TAG;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "lys-data.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String SP_KEY_DB_VER = "db_ver";
 
     private SQLiteDatabase myDataBase;
