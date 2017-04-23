@@ -5,10 +5,10 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "io.cordova.lysedebiyat"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 25
-        versionCode 101112
-        versionName "2.0.6"
+        versionCode 101114
+        versionName "2.0.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
