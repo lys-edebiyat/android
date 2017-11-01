@@ -71,6 +71,8 @@ public class QuestionHelper {
 
     private InterstitialAd mInterstitialAd;
 
+    private Integer questionsSinceLastAd = 0;
+
     // OnClickListener for the answer buttons.
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -87,10 +89,13 @@ public class QuestionHelper {
             }
 
             Random r = new Random();
-            int randomNum = r.nextInt(20);
-            if (randomNum <= 1 && mInterstitialAd.isLoaded()) {
+            int randomNum = r.nextInt(10);
+            if (randomNum <= 1 && mInterstitialAd.isLoaded() && questionsSinceLastAd > 5) {
                 mInterstitialAd.show();
+                questionsSinceLastAd = 0;
             }
+
+            questionsSinceLastAd++;
 
         }
     };
