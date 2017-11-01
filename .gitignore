@@ -136,3 +136,5 @@ crashlytics-build.properties
 fabric.properties
 
 # End of https://www.gitignore.io/api/androidstudio
+
+app/src/main/res/values/secrets.xml
