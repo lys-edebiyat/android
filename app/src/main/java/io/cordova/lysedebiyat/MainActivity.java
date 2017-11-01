@@ -24,6 +24,9 @@ import io.cordova.lysedebiyat.DatabaseHelpers.StatsDatabaseHelper;
 import io.cordova.lysedebiyat.Helpers.NavigationHelper;
 import io.cordova.lysedebiyat.Helpers.QuestionHelper;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 public class MainActivity extends BaseActivity {
 
     static final String APP_WEB_URL = "https://lys-edebiyat.github.io/";
@@ -39,7 +42,6 @@ public class MainActivity extends BaseActivity {
     long unixTime = System.currentTimeMillis() / 1000L;
 
     boolean doubleBackToExitPressedOnce = false;
-
 
     private enum MenuItems {
         BACK_TO_HOME,

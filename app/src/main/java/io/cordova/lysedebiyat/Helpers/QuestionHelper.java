@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,9 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.github.javiersantos.materialstyleddialogs.enums.Style;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Arrays;
@@ -65,12 +69,15 @@ public class QuestionHelper {
     private DataBaseHelper myDbHelper;
     private SharedPreferences settings;
 
+    private InterstitialAd mInterstitialAd;
+
     // OnClickListener for the answer buttons.
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Button clicked = (Button) v;
             String selectedAnswer = clicked.getText().toString();
+
             if (answer.equals(selectedAnswer)) {
                 displaySuccess();
                 logAnalyticsEvent("Correct");
@@ -78,6 +85,13 @@ public class QuestionHelper {
                 displayFailure();
                 logAnalyticsEvent("Wrong");
             }
+
+            Random r = new Random();
+            int randomNum = r.nextInt(20);
+            if (randomNum <= 1 && mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
+
         }
     };
 
@@ -97,6 +111,20 @@ public class QuestionHelper {
         settings = context.getSharedPreferences(PREFS_NAME, 0);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
+
+        // Get the initial ad.
+        final String testDeviceId = c.getResources().getString(R.string.admon_test_device_id);
+        mInterstitialAd = new InterstitialAd(c);
+        mInterstitialAd.setAdUnitId(c.getResources().getString(R.string.admob_interstitial_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(testDeviceId).build());
+
+        // Set an AdListener.
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(testDeviceId).build());
+            }
+        });
 
         initializeAnswerDialog();
         prepareButtonBindings();
@@ -377,7 +405,7 @@ public class QuestionHelper {
         showMessage(R.color.dialogHeaderCorrect, "Doğru cevap!", getDialogMessage());
     }
 
-    private void logAnalyticsEvent(String eventType){
+    private void logAnalyticsEvent(String eventType) {
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, "Question");
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, eventType);
