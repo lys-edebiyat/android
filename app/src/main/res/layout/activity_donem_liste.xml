@@ -6,11 +6,22 @@
     android:layout_height="match_parent"
     tools:context="io.cordova.lysedebiyat.EraListActivity">
 
-    <include android:id="@+id/toolbar" layout="@layout/toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/yazar_eser_liste"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar" />
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_banner_id"></com.google.android.gms.ads.AdView>
 </RelativeLayout>

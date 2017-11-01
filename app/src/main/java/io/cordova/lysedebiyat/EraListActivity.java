@@ -8,6 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import io.cordova.lysedebiyat.SliderHelper.SlidingBaseWithNoBackActivity;
 
 public class EraListActivity extends SlidingBaseWithNoBackActivity {
@@ -19,9 +22,15 @@ public class EraListActivity extends SlidingBaseWithNoBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donem_liste);
         setToolbarTitle(this, "Dönemler");
+
+        // Set the admob ad.
+        AdView mAdView = (AdView) this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(this.getResources().getString(R.string.admon_test_device_id)).build();
+        mAdView.loadAd(adRequest);
+
         prepareListData();
         setView();
-
     }
 
     private void setView() {
