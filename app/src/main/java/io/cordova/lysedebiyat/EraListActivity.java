@@ -26,7 +26,7 @@ public class EraListActivity extends SlidingBaseWithNoBackActivity {
         // Set the admob ad.
         AdView mAdView = (AdView) this.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(this.getResources().getString(R.string.admon_test_device_id)).build();
+                .addTestDevice(this.getResources().getString(R.string.admob_test_device_id)).build();
         mAdView.loadAd(adRequest);
 
         prepareListData();

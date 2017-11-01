@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LYS Edebiyat Yazar - Eser Bilgi Yarışması</string>
+    <string name="app_name">YKS - LYS Edebiyat Yazar - Eser Bilgi Yarışması</string>
 
 
     <string name="bullet_point">• </string>
@@ -19,14 +19,13 @@
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
     <string name="share_text">
-        Süper bir uygulama buldum! Adı "LYS Edebiyat Yazar - Eser Bilgi Yarışması".
+        Süper bir uygulama buldum! Adı "YKS Edebiyat Yazar - Eser Bilgi Yarışması".
         İndir, beraber oynayalım.\n\n
         Appstore: https://appsto.re/tr/SA1agb \n\n
         Play Store: https://play.google.com/store/apps/details?id=io.cordova.lysedebiyat\n\n
         Web: http://lys-edebiyat.github.io
     </string>
     <string name="share_dialog_title">Paylaş</string>
-
 
 
     <!-- Menu Titles -->
@@ -37,20 +36,34 @@
     <string name="open_in_web"><b>Tarayıcıda Aç</b></string>
     <string name="share"><b>Paylaş</b></string>
     <string name="rate_on_store"><b>Puan Ver</b></string>
-    <string name="about_us"><b>Hakkında</b></string>
+    <string name="about_us"><b>Hakkımızda</b></string>
     <string name="contact_us"><b>İletişim</b></string>
     <string name="settings"><b>Ayarlar</b></string>
     <!-- Menu Titles End -->
 
     <!-- About Us -->
-    <string name="about_us_title">Hakkında</string>
-    <string name="about_us_header_one">LYS Edebiyat</string>
+    <string name="about_us_title">Hakkımızda</string>
+    <string name="about_us_header_one">YKS - LYS Edebiyat</string>
     <string name="about_us_header_two">Yazar - Eser\nBilgi Yarışması</string>
     <string name="about_us_version_title"><u>Sürüm Bilgisi</u></string>
     <string name="application_database_version">3</string>
-    <string name="about_us_version_number">v2.0.6</string>
-    <string name="about_us_version_content"><b>v2.0.6</b> numaralı sürümü kullanıyorsun gibi görünüyor.
-        Bu sürümde <b>dönem seçme özelliğini getirdik</b>. Ek olarak veri setinde bazı güncellemeler yaptık.\n\nGenel olarak
+    <string name="about_us_version_number">v2.1.0</string>
+    <string name="about_us_version_content"><b>v2.1.0</b> numaralı sürümü kullanıyorsun gibi görünüyor.
+        Bu sürüm ile birlikte veri seti içerisinde bazı güncellemeler hazırladık. Bununla beraber
+        sınav adının değişmesine istinaden biz de uygulama adımızı güncelledik, belki farketmişsindir.
+        Aynı şekilde sınav döneminde sana yardımcı olacağını umduğumuz bazı bilgileri eklemeyi planlıyoruz.
+        Aklına takılan, eleştirmek istediğin, hatalı gördüğün herhangi bir şey olursa menüdeki "İletişim"
+        sekmesinden bize ulaşabilirsin.\n\nYine bu sürüm ile beraber uygulama içerisine bazı reklamlar
+        koyduk, farkedeceksin muhtemelen.
+        Bu uygulamayı 1 seneden fazla bir süredir, hiç bir kazancımız olmadan geliştiriyoruz, fakat
+        bu süre dahilinde zamanımız hariç sunucu ve geliştirici masraflarımız oluyor ve tüm bunları
+        cebimizden karşılıyoruz. Bunun önüne geçmek adına uygulama içerisinde seni rahatsız etmeyecek
+        düzeyde tutmaya çalıştığımız bazı reklamlar oluşturduk. Reklamların sık sık karşına çıkıp senin
+        deneyimini kötü etkilemesinin de önüne geçmeye çalıştık, umuyoruz ki uygulamayı kullanma deneyimini
+        kötü yönde etkilemez bu değişiklik. Bu bizim için bir mecburiyet haline geldiği için bu reklamları
+        kullanmak zorunda kaldık; aksi takdirde uygulamayı paralı hale getirmemiz gerekecekti ki bizler de
+        öğrenci olduk, senin halinden anlıyoruz, dolayısıyla bunu yapmayı tercih etmedik, durum budur.\n\nBundan
+        önceki sürümde <b>dönem seçme özelliğini getirdik</b>. Ek olarak veri setinde bazı güncellemeler yaptık.\n\nGenel olarak
         v2 sürümüyle beraber uygulamayı tamamen baştan
         yazdık, daha hızlı ve daha kullanışlı hale getirdik.\n\nArtık uygulama içerisinde <b>\"Dönem Listesi\"</b>
         sekmesinden dönemlerine göre ayrılmış yazar ve eserlere ulaşabilirsin.
@@ -69,9 +82,8 @@
         uygulamaları daha kullanışlı hale getirmeye çalıştık, geri bildirimler sayesinde veri setimizdeki hataları
         düzelttik, yeni eser ve yazarlar ekledik. Bugün iOS ve Android platformlarında on binlerce öğrencinin
         kullandığı bir uygulama haline geldi bu proje, büyümeye de devam ediyor.\n\nBaşından beri bu uygulamanın öğrencilere faydalı olması için çabaladık.
-        <u>Şu an için uygulamadan herhangi bir gelirimiz yok,
-        vakit ayırabildikçe geliştirmeye çalışıyoruz sadece.</u> Dolayısıyla
-        yeni özellikler eklemek, hataları düzeltmek gibi güncellemeleri sunmamız biraz vakit alabiliyor.
+        Uygulamayı günlük işlerimizin yanında geliştirmeye çalışıyoruz,
+        dolayısıyla yeni özellikler eklemek, hataları düzeltmek gibi güncellemeleri sunmamız biraz vakit alabiliyor.
         Bu süreçte anlayışlı olduğunuz için teşekkür ederiz.
     </string>
     <string name="about_us_details_title"><u>Nasıl geliştiriyoruz?</u></string>

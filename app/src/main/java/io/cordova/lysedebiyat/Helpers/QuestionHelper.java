@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -33,9 +32,6 @@ import java.util.Random;
 
 import io.cordova.lysedebiyat.DatabaseHelpers.DataBaseHelper;
 import io.cordova.lysedebiyat.R;
-
-import static android.R.attr.id;
-import static android.R.attr.name;
 
 public class QuestionHelper {
 
@@ -117,7 +113,7 @@ public class QuestionHelper {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
 
         // Get the initial ad.
-        final String testDeviceId = c.getResources().getString(R.string.admon_test_device_id);
+        final String testDeviceId = c.getResources().getString(R.string.admob_test_device_id);
         mInterstitialAd = new InterstitialAd(c);
         mInterstitialAd.setAdUnitId(c.getResources().getString(R.string.admob_interstitial_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(testDeviceId).build());

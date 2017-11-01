@@ -1,13 +1,10 @@
 package io.cordova.lysedebiyat;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -61,7 +58,7 @@ public class PageFragment extends Fragment {
             importantAuthors.setText(eraInfo.getAuthors());
 
             // Set the admob ad.
-            String testDeviceId = this.getResources().getString(R.string.admon_test_device_id);
+            String testDeviceId = this.getResources().getString(R.string.admob_test_device_id);
             AdView mAdView = (AdView) view.findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().addTestDevice(testDeviceId).build();
             mAdView.loadAd(adRequest);
