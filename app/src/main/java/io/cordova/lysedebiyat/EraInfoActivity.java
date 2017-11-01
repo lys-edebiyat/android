@@ -45,12 +45,4 @@ public class EraInfoActivity implements Serializable {
     public void setAuthors(String authors) {
         this.authors = authors;
     }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
 }

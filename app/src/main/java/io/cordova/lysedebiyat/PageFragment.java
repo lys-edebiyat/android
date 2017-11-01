@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import io.cordova.lysedebiyat.Adapters.AuthorBookAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -57,16 +60,11 @@ public class PageFragment extends Fragment {
             eraInfoText.setText(eraInfo.getInfo());
             importantAuthors.setText(eraInfo.getAuthors());
 
-            // Set the button click listener.
-            Button detailsButton = (Button) view.findViewById(R.id.details_button);
-            detailsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Uri uriUrl = Uri.parse(eraInfo.getLink());
-                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                    startActivity(launchBrowser);
-                }
-            });
+            // Set the admob ad.
+            String testDeviceId = this.getResources().getString(R.string.admon_test_device_id);
+            AdView mAdView = (AdView) view.findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice(testDeviceId).build();
+            mAdView.loadAd(adRequest);
 
             return view;
         } else {
