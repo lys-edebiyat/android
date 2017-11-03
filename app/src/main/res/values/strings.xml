@@ -36,6 +36,7 @@
     <string name="open_in_web"><b>Tarayıcıda Aç</b></string>
     <string name="share"><b>Paylaş</b></string>
     <string name="rate_on_store"><b>Puan Ver</b></string>
+    <string name="about_exam"><b>YKS Bilgilendirme</b></string>
     <string name="about_us"><b>Hakkımızda</b></string>
     <string name="contact_us"><b>İletişim</b></string>
     <string name="settings"><b>Ayarlar</b></string>
@@ -99,6 +100,64 @@
     <string name="about_us_developers_title"><u>Geliştiriciler</u></string>
     <string name="about_us_developers_content">Burak Karakan &amp; Furkan Hatipoğlu</string>
     <!-- About Us End -->
+
+    <!-- About Exam -->
+    <string name="about_exam_title">YKS Hakkında</string>
+    <string name="what_is_exam_title">YKS nedir?</string>
+    <string name="what_is_exam_content">Yüksek Öğretim Kurumları Sınavı (YKS), lise diploması
+        olan herkesin üniversiteye geçebilmek için girmesi gereken ÖSYM sınavıdır.</string>
+    <string name="about_system_title">Sistem nasıl olacak?</string>
+    <string name="about_system_content">Adaylar, Haziran ayının içinde bir Cumartesi günü, sabah ve
+        öğlen olarak iki oturuma tâbi tutulacak. Sabah olan oturum Türkçe ve Matematik olarak iki
+        bölümden oluşacak. Bu sınavda 150 puanı geçebilen adaylar ön lisans tercihinde bulunmaya,
+        180 puanı geçen adaylar da ikinci oturuma girebilmeye hak kazanacaklar ve sınavda 200 puanı
+        geçebilen adaylar 2 sene boyunca bu puanı kullanabilme hakkına sahip olacak. Bu oturumdan
+        sonra, adayların temel ihtiyaçlarını karşılayabilmeleri yanı sıra zihinsel olarak da
+        rahatlamaları için bir öğle arası verilecek. İkinci oturumda ise, eski sistemdeki LYS gibi,
+        Edebiyat - Coğrafya, Sosyal Bilimler, Matematik ve Fen Bilimleri olarak dört dal yer alacak
+        ve aday kendi alanının ihtiyaç duyduğu testleri çözecek.</string>
+    <string name="question_count_title">Kaç soru olacak?</string>
+    <string name="question_count_content">İlk oturumda 40 soru Türkçe , 40 soru Matematik,
+        toplam 80 soru olacak. Adaylara tanınan süre 80 dakika olacak. İkinci oturumda,
+        Türk Dili ve Edebiyatı-Coğrafya 1 40 soru, Sosyal Bilimler 40 soru, Matematik 40 soru ve
+        Fen Bilimleri 40 soru olacak.</string>
+    <string name="scoring_title">Puanlama nasıl olacak?</string>
+    <string name="scoring_content" formatted="false">Önlisans programlarında Temel Yeterlilik
+        Testi Puanı (TYT Puanı) esas alınmakta. Bu TYT puanı ise şu şekilde hesaplanıyor: Türkçe testinden
+        alınan puanın yarısı ile Matematik testinden alınan puanın yarısı toplanıyor.
+        Lisans programlarında ise Sözel, Sayısal, Eşit Ağırlık ve Dil olmak üzere dört puan türü mevcut.
+        Bu puan türlerinin tümü hesaplanırken TYT puanının %40\'ı ve ilgili alan puanının %60\'ı toplanacak.</string>
+    <string name="topics_title">Sınavda hangi konular var?</string>
+    <string name="topics_content">Sınavda şu an için hangi konuların çıkacağı belli olmamakla beraber
+    geçmiş sınavlar göz önüne alındığında şu konuların çıkma ihtimalleri yüksek görünmekte:\n\n
+    • Güzel Sanatlar ve Edebiyat\n
+    • Metinlerin Sınıflandırılması\n
+    • Coşku ve Heyecanı Dile Getiren Metinler\n
+    • Şiir Bilgisi\n
+    • Öğretici Metinler\n
+    • Sözlü Anlatım Türleri\n
+    • Edebi Sanatlar (Söz Sanatları)\n
+    • Nazım Biçimleri ve Türleri\n
+    • İslamiyet Kabulü Öncesi Türk Edebiyatı\n
+    • İslami Dönem İlk Dil ve Edebiyat Ürünleri\n
+    • Oğuz Türkçesinin İlk Ürünleri\n
+    • Halk Edebiyatı\n
+    • Divan Edebiyatı\n
+    • Tanzimat Edebiyatı\n
+    • Servet-i Fünun Edebiyatı\n
+    • Fecri-Ati Edebiyatı\n
+    • Milli Edebiyat\n
+    • Cumhuriyet Döneminde Türk Edebiyatı\n
+    • Türkiye Dışındaki Türk Edebiyatı\n
+    • Edebi Akımlar\n
+    • Dünya Edebiyatı\n
+    • Türk Edebiyatı Eser Özetleri\n
+    • Türk ve Dünya Edebiyatındaki İlkler\n
+    </string>
+
+
+    <!-- About Exam End -->
+
 
     <string name="important_authors"><u>Önemli Yazarlar</u></string>
     <string name="detailed_info">Daha detaylı bilgi için tıklayın</string>

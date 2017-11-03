@@ -8,7 +8,6 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -18,14 +17,9 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import java.util.HashSet;
-
 import io.cordova.lysedebiyat.DatabaseHelpers.StatsDatabaseHelper;
 import io.cordova.lysedebiyat.Helpers.NavigationHelper;
 import io.cordova.lysedebiyat.Helpers.QuestionHelper;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 
 public class MainActivity extends BaseActivity {
 
@@ -48,11 +42,12 @@ public class MainActivity extends BaseActivity {
         ERA_SELECTION,
         ERA_LIST,
         AUTHOR_LIST,
+        ABOUT_EXAM,
         OPEN_IN_WEB,
         SHARE,
         RATE_ON_STORE,
         ABOUT_US,
-        CONTACT;
+        CONTACT,
     }
 
     @Override
@@ -96,6 +91,11 @@ public class MainActivity extends BaseActivity {
                 .withIdentifier(MenuItems.AUTHOR_LIST.ordinal())
                 .withName(R.string.author_list_title)
                 .withIcon(GoogleMaterial.Icon.gmd_book);
+
+        PrimaryDrawerItem aboutExam = new PrimaryDrawerItem()
+                .withIdentifier(MenuItems.ABOUT_EXAM.ordinal())
+                .withName(R.string.about_exam)
+                .withIcon(GoogleMaterial.Icon.gmd_question_answer);
 
         PrimaryDrawerItem rateOnStore = new PrimaryDrawerItem()
                 .withIdentifier(MenuItems.RATE_ON_STORE.ordinal())
@@ -142,6 +142,7 @@ public class MainActivity extends BaseActivity {
                         eraSelection,
                         eraList,
                         authorList,
+                        aboutExam,
                         new DividerDrawerItem(),
                         rateOnStore,
                         share,
@@ -166,6 +167,9 @@ public class MainActivity extends BaseActivity {
                                 break;
                             case AUTHOR_LIST:
                                 navigationHelper.navigateToActivity(AuthorListActivity.class);
+                                break;
+                            case ABOUT_EXAM:
+                                navigationHelper.navigateToActivity(AboutExamActivity.class);
                                 break;
                             case RATE_ON_STORE:
                                 navigationHelper.navigateToStore();
